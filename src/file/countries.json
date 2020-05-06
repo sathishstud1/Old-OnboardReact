@@ -922,8 +922,7 @@
 		{
 			"country": "United Kingdom",
 			"abbreviation": "GB",
-			"available":true,
-			"isSelected":false
+			"available":true
 		},
 		{
 			"country": "United States",

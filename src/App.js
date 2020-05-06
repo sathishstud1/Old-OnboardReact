@@ -8,13 +8,33 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      jsonData : customerOnboard
+      jsonData : {},
+      recreateLinesCount:{},
+      recreateLines:{},
+      reqFields: []
     };
-    this.reqFields= [];
+    this.jsonValues = {};
+    global = this;
   }
 
+  processMandatoryFields = (lines, id) =>{
+    let mandatoryFields = []
+    Object.keys(lines).map((lineIndex, index) => {
+      let line = lines[index];
+      let fields = line.fields;
+      //Fields List
+      Object.keys(fields).map((fieldIndex, index) => {
+        var fieldData = fields[index];
+        if(fieldData.required){
+          mandatoryFields.push(fieldData.name+id);
+        } 
+      });//Fields End
+    });//Lines End
+    this.setState({"reqFields":[...this.state.reqFields,...mandatoryFields]});
+  };
+
   addElements = (lines, refVal) =>{
-    let temp; 
+     let temp; 
      if(!this.state[refVal]){
       this.state[refVal] = [];
      }else{
@@ -27,12 +47,21 @@ class App extends React.Component {
      }    
      let divId = refVal + arr.length;
      let removeId = arr.length;
-     arr.push(<RecreateForm data={lines} changed={this.onChangeHandler} id={divId} 
+     arr.push(<RecreateForm data={lines} changed={this.onChangeHandler} id={divId} uniqueId ={arr.length}
                         remove={()=>this.removeElement(refVal,removeId)}/>);
      
      this.state[refVal].push(arr);
      this.setState({[refVal]:arr});
-     console.log(this.state)
+     
+     if(!this.state.recreateLinesCount[refVal]){
+        this.state.recreateLinesCount[refVal] = 1;
+     }else{
+        var recreateCount = this.state.recreateLinesCount[refVal];
+        recreateCount = recreateCount +1;
+        this.state.recreateLinesCount[refVal] = recreateCount;
+     }
+     this.processMandatoryFields(lines, removeId);
+    
   };
   
   removeElement = (refVal, counter) =>{
@@ -43,29 +72,30 @@ class App extends React.Component {
       }else{
         arr.push(null);
       }
-
     }
     this.state[refVal].push(arr);
     this.setState({[refVal]:arr});
+      var recreateCount = this.state.recreateLinesCount[refVal];
+      recreateCount = recreateCount -1;
+      this.state.recreateLinesCount[refVal] = recreateCount;
   };
    
   onChangeHandler = function (e) {
     e.persist();
     let obj = {};
     obj[e.target.id] = e.target.value;
-    //this.state[e.target.id] = e.target.value;
-    //console.log(this.state)
-    //this.setState(obj);
+    global.state.jsonData[e.target.id] = e.target.value;
   }
 
   saveform = () =>{
-    this.validateForm();
+    //this.validateForm();
+    console.log(this.state)
   }
  
   validateForm = () =>{
-    Object.keys(this.reqFields).map((field, index) => {
-      var key = this.reqFields[index];
-      var value = this.state[key];
+    Object.keys(this.state.reqFields).map((field, index) => {
+      var key = this.state.reqFields[index];
+      var value = this.state.jsonData[key];
       if(value==null || typeof value=='undfined'){
         alert(key +' is Required.');
       }
@@ -79,16 +109,19 @@ class App extends React.Component {
   exitform = () =>{
     alert('exit')
   }
+
+  componentDidMount() {
+    this.setState({ jsonData: this.jsonValues });
+  }
   
   render() {
     const mystyle = {
       margin:10
      };
+    this.state.reqFields = [];
     let items = [];
-    this.reqFields= [];
     let recreateCount = 1;
-
-    let pages = this.state.jsonData.PageList;
+    let pages = customerOnboard.PageList;
     //Pages
     Object.keys(pages).map((pageIndex, index) => {
       let page = pages[index];
@@ -109,13 +142,12 @@ class App extends React.Component {
             let line = linesList[index];
             let arr = [];
             let fields = line.fields;
-            console.log(fields)
             //Fields List
             Object.keys(fields).map((fieldIndex, index) => {
               var fieldData = fields[index];
               if(fieldData.required){
-                this.reqFields.push(fieldData.name);
-              }
+                this.state.reqFields.push(fieldData.name);
+              }              
               if(fieldData.type=="button"){
                 if(fieldData.name==""){
                   fieldData.clicked = this.searchSSN;
@@ -125,6 +157,8 @@ class App extends React.Component {
                 else if(fieldData.name=="exit"){
                   fieldData.clicked = this.exitform;
                 }
+              }else{
+                this.jsonValues[fieldData.name] = fieldData.value;
               }
               arr.push(fieldData);
             });//Fields End
@@ -136,6 +170,7 @@ class App extends React.Component {
           if(section.recreate!=null && section.recreate){
             let refVal = 'recreate'+recreateCount;
             recreateCount = recreateCount + 1;
+            this.state.recreateLines[refVal] = linesList;
               items.push(<div contentEditable='true' id={refVal} ref={refVal}>{this.state[refVal]}</div>);
               items.push(<button onClick={()=>this.addElements(linesList, refVal)} style={mystyle}
               type="button" >{section.recreatelabel}</button>);
