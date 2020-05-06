@@ -1,0 +1,244 @@
+{
+  "page": "Pages",
+  "PageList": [
+    {
+      "PageTitle": "Page 1",
+      "CategoryList": [
+        {
+          "categoryTitle": "Search Customer",
+          "sectionList": [
+            {
+              "sectionName": "Create Application",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "SSN",
+                      "name": "ssn",
+                      "type": "text",
+                      "required": true,
+                      "validation": "ssnValid",
+                      "value": "086-66-0123"
+                    },
+                    {
+                      "label": "Date Of Birth",
+                      "name": "dob",
+                      "type": "text",
+                      "required": true,
+                      "validation": "dateValid",
+                      "value": "05/05/1990"
+                    },
+                    {
+                      "label": "Enter",
+                      "name": "search",
+                      "type": "button",
+                      "result": "searchPopup"
+                    }
+                  ]
+                }                
+              ]
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Customer Details",
+          "sectionList": [
+            {
+              "sectionName": "Basic Info",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "First Name",
+                      "name": "firstname",
+                      "type": "text",
+                      "required": true,
+                      "validation": "onlyLetters",
+                      "value": "Satish"
+                    },
+                    {
+                      "label": "Middle Name",
+                      "name": "middlename",
+                      "type": "text",
+                      "required": "false",
+                      "value": "K"
+                    },
+                    {
+                      "label": "Last Name",
+                      "name": "lastname",
+                      "type": "text",
+                      "required": true,
+                      "validation": "onlyLetters",
+                      "value": "Krishna"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sectionName": "Customer Address",
+              "linesList": [
+                {
+                  "fields":[
+                    {
+                      "label": "Country",
+                      "name": "country",
+                      "type": "select",
+                      "link": "countries",
+                      "required": true,
+                      "value": ""
+                    }
+                  ]
+                },
+                {
+                  "fields": [
+                    {
+                      "label": "Residential address line 1",
+                      "name": "addr1",
+                      "type": "textarea",
+                      "required": true,
+                      "value": "95 Congress St , Apt 3"
+                    },
+                    {
+                      "label": "Residential address line 2",
+                      "name": "addr2",
+                      "type": "textarea",
+                      "required": "false",
+                      "value": ""
+                    }                    
+                  ]
+                },
+                {
+                  "fields": [
+                    {
+                      "label": "City",
+                      "name": "city",
+                      "type": "text",
+                      "required": true,
+                      "value": ""
+                    },
+                    {
+                      "label": "State",
+                      "name": "state",
+                      "type": "select",
+                      "link": "states",
+                      "required": true,
+                      "value": ""
+                    },
+                    {
+                      "label": "ZIP Code",
+                      "name": "zip",
+                      "type": "text",
+                      "required": true,
+                      "validation": "onlyNumbers",
+                      "value": ""
+                    }
+                    
+                  ]
+                }
+              ],
+              "recreate": true,
+              "recreatelabel": "Send my statement to a different address"
+            },
+            {
+              "sectionName": "Contact Info",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Primary phone number",
+                      "name": "phonenumber",
+                      "type": "text",
+                      "required": true,
+                      "validation": "phoneValid",
+                      "value": "716-697-0438"
+                    },
+                    {
+                      "label": "Phone Type",
+                      "name": "phonetype",
+                      "type": "radiogroup",
+                      "required": true,
+                      "values": [
+                        "Mobile phone",
+                        "Home phone"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "recreate": true,
+              "recreatelabel": "Add phone number"
+            },
+            {
+              "sectionName": "Email Info",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Email Address",
+                      "name": "email",
+                      "type": "text",
+                      "required": true,
+                      "validation": "emailValid",
+                      "value": "sk@gmail.com"
+                    }
+                  ]
+                }
+              ],
+              "recreate": true,
+              "recreatelabel": "Add Email Address"
+            },
+            {
+              "sectionName": "Other Info",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Are you a U.S. citizen?",
+                      "name": "citizen",
+                      "type": "radiogroup",
+                      "required": true,
+                      "values": [
+                        "Yes",
+                        "No"
+                      ]
+                    },
+                    {
+                      "label": "Do you have a dual citizenship?",
+                      "name": "dualcitizen",
+                      "type": "radiogroup",
+                      "required": true,
+                      "values": [
+                        "Yes",
+                        "No"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sectionName": "",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Save and Continue",
+                      "name": "save",
+                      "type": "button"
+                    },
+                    {
+                      "label": "Exit",
+                      "name": "exit",
+                      "type": "button"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }        
+      ]
+    }   
+  ]
+}
