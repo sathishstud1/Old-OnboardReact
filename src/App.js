@@ -3,6 +3,7 @@ import './App.css';
 import RecreateForm from './components/RecreateForm';
 import FormModel from './components/FormModel';
 import customerOnboard from './file/cutomerOnboard.json';
+import validator from './components/Validation';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,28 +11,13 @@ class App extends React.Component {
     this.state = {
       jsonData : {},
       recreateLinesCount:{},
-      recreateLines:{},
-      reqFields: []
+      recreateLines:{}
     };
     this.jsonValues = {};
     global = this;
+    this.reqFields = [];
+    this.addedFields = [];
   }
-
-  processMandatoryFields = (lines, id) =>{
-    let mandatoryFields = []
-    Object.keys(lines).map((lineIndex, index) => {
-      let line = lines[index];
-      let fields = line.fields;
-      //Fields List
-      Object.keys(fields).map((fieldIndex, index) => {
-        var fieldData = fields[index];
-        if(fieldData.required){
-          mandatoryFields.push(fieldData.name+id);
-        } 
-      });//Fields End
-    });//Lines End
-    this.setState({"reqFields":[...this.state.reqFields,...mandatoryFields]});
-  };
 
   addElements = (lines, refVal) =>{
      let temp; 
@@ -48,7 +34,7 @@ class App extends React.Component {
      let divId = refVal + arr.length;
      let removeId = arr.length;
      arr.push(<RecreateForm data={lines} changed={this.onChangeHandler} id={divId} uniqueId ={arr.length}
-                        remove={()=>this.removeElement(refVal,removeId)}/>);
+                        remove={()=>this.removeElement(lines,refVal,removeId)}/>);
      
      this.state[refVal].push(arr);
      this.setState({[refVal]:arr});
@@ -60,14 +46,14 @@ class App extends React.Component {
         recreateCount = recreateCount +1;
         this.state.recreateLinesCount[refVal] = recreateCount;
      }
-     this.processMandatoryFields(lines, removeId);
-    
+     let addfields = validator.processMandatoryFields(lines, removeId);
+     this.addedFields = [...this.addedFields,...addfields];
   };
   
-  removeElement = (refVal, counter) =>{
+  removeElement = (lines, refVal, removeId) =>{
     let arr = [];
     for(let i=0;i<this.state[refVal].length;i++){
-      if(counter!=i){
+      if(removeId!=i){
           arr.push(this.state[refVal][i]);
       }else{
         arr.push(null);
@@ -78,6 +64,8 @@ class App extends React.Component {
       var recreateCount = this.state.recreateLinesCount[refVal];
       recreateCount = recreateCount -1;
       this.state.recreateLinesCount[refVal] = recreateCount;
+      var newFields = validator.removeMandatoryFields(lines, removeId, this.addedFields);
+      this.addedFields = [...newFields];
   };
    
   onChangeHandler = function (e) {
@@ -88,20 +76,12 @@ class App extends React.Component {
   }
 
   saveform = () =>{
-    //this.validateForm();
-    console.log(this.state)
+    console.log(this.state)    
+    let validateFields = [...this.reqFields,...this.addedFields];
+    console.log(validateFields)
+    let isValid = validator.validateForm(validateFields, this.state.jsonData); 
+    console.log(isValid);   
   }
- 
-  validateForm = () =>{
-    Object.keys(this.state.reqFields).map((field, index) => {
-      var key = this.state.reqFields[index];
-      var value = this.state.jsonData[key];
-      if(value==null || typeof value=='undfined'){
-        alert(key +' is Required.');
-      }
-    });
-  }
-
   searchSSN = () =>{
 
   }
@@ -118,7 +98,7 @@ class App extends React.Component {
     const mystyle = {
       margin:10
      };
-    this.state.reqFields = [];
+    this.reqFields = [];
     let items = [];
     let recreateCount = 1;
     let pages = customerOnboard.PageList;
@@ -146,7 +126,7 @@ class App extends React.Component {
             Object.keys(fields).map((fieldIndex, index) => {
               var fieldData = fields[index];
               if(fieldData.required){
-                this.state.reqFields.push(fieldData.name);
+                this.reqFields.push(fieldData.name);
               }              
               if(fieldData.type=="button"){
                 if(fieldData.name==""){
