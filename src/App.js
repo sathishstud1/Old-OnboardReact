@@ -70,9 +70,11 @@ class App extends React.Component {
    
   onChangeHandler = function (e) {
     e.persist();
-    let obj = {};
-    obj[e.target.id] = e.target.value;
-    global.state.jsonData[e.target.id] = e.target.value;
+    if(e.target.type=="radio"){
+      global.state.jsonData[e.target.name] = e.target.value;
+    }else{
+      global.state.jsonData[e.target.id] = e.target.value;
+    }   
   }
 
   saveform = () =>{
@@ -82,6 +84,7 @@ class App extends React.Component {
     let isValid = validator.validateForm(validateFields, this.state.jsonData); 
     console.log(isValid);   
   }
+  
   searchSSN = () =>{
 
   }

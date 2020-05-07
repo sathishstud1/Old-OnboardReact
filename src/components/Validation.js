@@ -1,3 +1,4 @@
+//Add required fields 
 this.processMandatoryFields = (lines, id) =>{
     let mandatoryFields = []
     Object.keys(lines).map((lineIndex, index) => {
@@ -14,6 +15,7 @@ this.processMandatoryFields = (lines, id) =>{
     return mandatoryFields;
 }
 
+//Remove required Fields
 this.removeMandatoryFields = (lines, id, addedFields) =>{
     Object.keys(lines).map((lineIndex, index) => {
       let line = lines[index];
@@ -29,6 +31,7 @@ this.removeMandatoryFields = (lines, id, addedFields) =>{
     return addedFields;
 }
 
+//Vaildate form fields
 this.validateForm = (validateFields, jsonData) =>{
     let flag = true;
     Object.keys(validateFields).map((field, index) => {
