@@ -5,7 +5,7 @@ class FormModel extends React.Component {
   constructor(props) {
     super(props);
   }
- 
+
   render() {
       let arr = this.props.data;
       let label = '';
@@ -21,19 +21,33 @@ class FormModel extends React.Component {
           }
           switch(fieldData.type){
             case('text'): 
-                formfields.push(<input style = {mystyle} type={fieldData.type}  
-                    required={fieldData.required} id={fieldData.name} name={fieldData.name} 
-                    onChange={this.props.changed} defaultValue={fieldData.value} />);
+              formfields.push(<input style = {mystyle} 
+                                      type={fieldData.type}  
+                                      required={fieldData.required} 
+                                      id={fieldData.name} 
+                                      name={fieldData.name} 
+                                      ref={fieldData.name}
+                                      onChange={this.props.changed} 
+                                      defaultValue={fieldData.value} />);
              break;
             case('textarea'):
-                formfields.push(<textarea style = {mystyle} defaultValue={fieldData.value} 
-                    required={fieldData.required} id={fieldData.name} name={fieldData.name}
-                    onChange={this.props.changed} />);
+                formfields.push(<textarea style = {mystyle} 
+                                defaultValue={fieldData.value} 
+                                required={fieldData.required} 
+                                id={fieldData.name} 
+                                name={fieldData.name} 
+                                ref={fieldData.name}
+                                onChange={this.props.changed} />);
              break;
             case('radiogroup'):
                 Object.keys(fieldData.values).map((value, index) => {
                     var ids = fieldData.name+index;
-                    formfields.push(<input type="radio" onChange={this.props.changed} defaultValue ={fieldData.values[index]} name={fieldData.name} id={ids}></input>);
+                    formfields.push(<input type="radio" 
+                                    onChange={this.props.changed} 
+                                    defaultValue ={fieldData.values[index]} 
+                                    name={fieldData.name} 
+                                    id={ids} 
+                                    ref={fieldData.name}></input>);
                     formfields.push(<label >{fieldData.values[index]}</label>);
                 });
              break;
@@ -55,9 +69,12 @@ class FormModel extends React.Component {
                 }else if(link=="states"){
         
                 }
-                formfields.push(<select id={fieldData.name} onChange={this.props.changed} style = {mystyle}>
-                {options}
-              </select>);
+                formfields.push(<select ref={fieldData.name} 
+                                        id={fieldData.name} 
+                                        onChange={this.props.changed} 
+                                        style = {mystyle}>
+                                  {options}
+                                </select>);
              break;
              case('button'):
                 formfields.push(<button onClick={fieldData.clicked} style={mystyle} id={fieldData.name} 

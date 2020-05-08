@@ -9,14 +9,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      jsonData : {},
-      recreateLinesCount:{},
-      recreateLines:{}
+      customerOnboardJson: customerOnboard,
+      jsonValues : {},
+      recreateArray:[],
+      recreateLines:{},
+      recreateLinesCount:{}   
     };
-    this.jsonValues = {};
-    global = this;
+    this.defaultValues = {};
     this.reqFields = [];
+    this.addedReqFields = [];
     this.addedFields = [];
+    global = this;
+
   }
 
   addElements = (lines, refVal) =>{
@@ -46,43 +50,47 @@ class App extends React.Component {
         recreateCount = recreateCount +1;
         this.state.recreateLinesCount[refVal] = recreateCount;
      }
-     let addfields = validator.processMandatoryFields(lines, removeId);
-     this.addedFields = [...this.addedFields,...addfields];
+     let processFields = validator.addFields(lines, removeId);
+     this.addedReqFields = [...this.addedReqFields,...processFields.reqFields];
+     this.addedFields = [...this.addedFields,...processFields.allFields];
+     Object.assign(this.state.jsonValues, this.state.jsonValues, processFields.defaultValues);
   };
   
   removeElement = (lines, refVal, removeId) =>{
-    let arr = [];
-    for(let i=0;i<this.state[refVal].length;i++){
-      if(removeId!=i){
-          arr.push(this.state[refVal][i]);
-      }else{
-        arr.push(null);
+      let arr = [];
+      for(let i=0;i<this.state[refVal].length;i++){
+        if(removeId!=i){
+            arr.push(this.state[refVal][i]);
+        }else{
+          arr.push(null);
+        }
       }
-    }
-    this.state[refVal].push(arr);
-    this.setState({[refVal]:arr});
+      this.state[refVal].push(arr);
+      this.setState({[refVal]:arr});
       var recreateCount = this.state.recreateLinesCount[refVal];
       recreateCount = recreateCount -1;
       this.state.recreateLinesCount[refVal] = recreateCount;
-      var newFields = validator.removeMandatoryFields(lines, removeId, this.addedFields);
-      this.addedFields = [...newFields];
+      let processFields = validator.removeFields(lines, removeId, this.addedReqFields, this.addedFields, this.state.jsonValues);
+      this.addedReqFields = [...processFields.reqFields];
+      this.addedFields = [...processFields.allFields];
+      Object.assign(this.state.jsonValues, this.state.jsonValues, processFields.defaultValues);
   };
    
   onChangeHandler = function (e) {
     e.persist();
     if(e.target.type=="radio"){
-      global.state.jsonData[e.target.name] = e.target.value;
+      global.state.jsonValues[e.target.name] = e.target.value;
     }else{
-      global.state.jsonData[e.target.id] = e.target.value;
-    }   
+      global.state.jsonValues[e.target.id] = e.target.value;
+    }
   }
 
   saveform = () =>{
-    console.log(this.state)    
-    let validateFields = [...this.reqFields,...this.addedFields];
-    console.log(validateFields)
-    let isValid = validator.validateForm(validateFields, this.state.jsonData); 
-    console.log(isValid);   
+    console.log(this.state) 
+    //let validateFields = [...this.reqFields,...this.addedReqFields];
+    //console.log(validateFields)
+    //let isValid = validator.validateForm(validateFields, this.state.jsonValues); 
+    //console.log(isValid);   
   }
   
   searchSSN = () =>{
@@ -94,7 +102,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ jsonData: this.jsonValues });
+    this.setState({ jsonValues: this.defaultValues });
   }
   
   render() {
@@ -102,6 +110,7 @@ class App extends React.Component {
       margin:10
      };
     this.reqFields = [];
+    this.state.recreateArray = [];
     let items = [];
     let recreateCount = 1;
     let pages = customerOnboard.PageList;
@@ -141,7 +150,7 @@ class App extends React.Component {
                   fieldData.clicked = this.exitform;
                 }
               }else{
-                this.jsonValues[fieldData.name] = fieldData.value;
+                this.defaultValues[fieldData.name] = fieldData.value;
               }
               arr.push(fieldData);
             });//Fields End
@@ -154,6 +163,7 @@ class App extends React.Component {
             let refVal = 'recreate'+recreateCount;
             recreateCount = recreateCount + 1;
             this.state.recreateLines[refVal] = linesList;
+            this.state.recreateArray.push(refVal);
               items.push(<div contentEditable='true' id={refVal} ref={refVal}>{this.state[refVal]}</div>);
               items.push(<button onClick={()=>this.addElements(linesList, refVal)} style={mystyle}
               type="button" >{section.recreatelabel}</button>);

@@ -20,21 +20,30 @@ function renderElement (props){
             }
             switch(fieldData.type){
               case('text'): 
-              formfield.push(<input style = {mystyle} type={fieldData.type}  
-                      required={fieldData.required} id={fieldId} name={fieldId}
-                      onChange={props.changed} defaultValue={fieldData.value}/>);
+              formfield.push(<input style = {mystyle} 
+                                    type={fieldData.type}  
+                                    required={fieldData.required} 
+                                    id={fieldId} name={fieldId}
+                                    onChange={props.changed} 
+                                    defaultValue={fieldData.value}
+                                    />);
                break;
               case('textarea'):
-              formfield.push( <textarea style = {mystyle} defaultValue={fieldData.value} 
-                      required={fieldData.required} id={fieldId} name={fieldId} 
-                      onChange={props.changed}/>);
+              formfield.push( <textarea style = {mystyle} 
+                                        defaultValue={fieldData.value} 
+                                        required={fieldData.required} 
+                                        id={fieldId} 
+                                        name={fieldId}                                        
+                                        onChange={props.changed}/>);
                break;
               case('radiogroup'):
                   Object.keys(fieldData.values).map((value, index) => {
                       var ids = fieldId+index;
                       formfield .push(<input type="radio" 
-                      defaultValue ={fieldData.values[index]} name={fieldId} id={ids}
-                      onChange={props.changed}></input>);
+                                             defaultValue ={fieldData.values[index]} 
+                                             name={fieldId} 
+                                             id={ids}                                             
+                                             onChange={props.changed}></input>);
                       formfield.push(<label >{fieldData.values[index]}</label>);
                   });
                break;
@@ -56,7 +65,9 @@ function renderElement (props){
                 }else if(link=="states"){
         
                 }
-                  formfield.push(<select id={fieldId} onChange={props.changed} style = {mystyle}>
+                  formfield.push(<select id={fieldId} 
+                                         onChange={props.changed} 
+                                         style = {mystyle}>
                                {options}
                                </select>);
                break;

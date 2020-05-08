@@ -60,7 +60,7 @@
                       "label": "Middle Name",
                       "name": "middlename",
                       "type": "text",
-                      "required": "false",
+                      "required": false,
                       "value": "K"
                     },
                     {
@@ -103,7 +103,7 @@
                       "label": "Residential address line 2",
                       "name": "addr2",
                       "type": "textarea",
-                      "required": "false",
+                      "required": false,
                       "value": "New york"
                     }                    
                   ]
