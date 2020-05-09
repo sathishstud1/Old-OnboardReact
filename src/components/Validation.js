@@ -3,21 +3,29 @@ this.addFields = (lines, id) =>{
     let processFields = {
       "reqFields":[],
       "allFields":[],
-      "defaultValues":{}
+      "defaultValues":{},
+      "addedLines":[]
     }
+    let addedLines = []
     Object.keys(lines).map((lineIndex, index) => {
       let line = lines[index];
       let fields = line.fields;
+      let addedLine = [];
       //Fields List
       Object.keys(fields).map((fieldIndex, index) => {
         var fieldData = fields[index];
-        processFields.allFields.push(fieldData.name+id);
-        processFields.defaultValues[fieldData.name+id] = fieldData.value;
+        let name = fieldData.name+id;
+        processFields.allFields.push(name);
+        processFields.defaultValues[name] = fieldData.value;
         if(fieldData.required){
-          processFields.reqFields.push(fieldData.name+id);
-        } 
+          processFields.reqFields.push(name);
+        }
+        //fieldData.name = name;
+        addedLine.push(fieldData);
       });//Fields End
+      addedLines.push(addedLine);
     });//Lines End
+    processFields.addedLines = addedLines;
     return processFields;
 }
 
@@ -34,12 +42,12 @@ this.removeFields = (lines, id, addedReqFields, addedFields, jsonValues) =>{
       //Fields List
       Object.keys(fields).map((fieldIndex, index) => {
         var fieldData = fields[index];
-        
-        addedFields.pop(fieldData.name+id);
+        let name = fieldData.name+id;
+        addedFields.pop(name);
         if(fieldData.required){
-          addedReqFields.pop(fieldData.name+id);
+          addedReqFields.pop(name);
         }
-        delete jsonValues[fieldData.name+id];
+        delete jsonValues[name];
       });//Fields End
     });//Lines End
     processFields.reqFields = addedReqFields;
