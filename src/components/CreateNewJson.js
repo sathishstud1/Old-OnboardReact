@@ -18,16 +18,20 @@ this.create = (jsonValues, recreateArray,
             let reIds = recreateIds[recreateArray[recreateCount]];            
             if(section.recreate!=null && section.recreate){
                 let relines = recreateLines[recreateArray[recreateCount]];
+                let newId = "";
                 Object.keys(relines).map((linesArry, index) => {
                     let reline = relines[index];
-                    console.log(reline)
+                    newId = reIds[index];
                     Object.keys(reline).map((lineArry, index) => {
                       let line_arr = reline[index];
+                      let newFields = [];
                      Object.keys(line_arr).map((line_index, index) => {
-                        let field = line_arr[index];
-                        field.name = field.name;
+                        var field = new Object();
+                        Object.assign(field, line_arr[index]);
+                        field.name = field.name+newId;
+                        newFields.push(field);
                       });
-                      linesList.push({"fields":line_arr});
+                      linesList.push({"fields":newFields});
                     });
                 });
                 section.linesList = linesList;

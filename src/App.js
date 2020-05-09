@@ -90,10 +90,9 @@ class App extends React.Component {
   }
 
   saveform = () =>{
-    console.log(this.state.jsonValues)
-    console.log(this.recreateLines)
     let customeOnboardNewJson = createJson.create(this.state.jsonValues, this.state.recreateArray,
       this.recreateLines, this.recreateIds, this.state.customerOnboardJson);
+      console.log(customeOnboardNewJson)
     //let validateFields = [...this.reqFields,...this.addedReqFields];
     //let isValid = validator.validateForm(validateFields, this.state.jsonValues); 
     /*let postData = {
