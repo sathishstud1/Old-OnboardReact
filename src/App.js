@@ -20,7 +20,6 @@ class App extends React.Component {
     this.reqFields = [];
     this.addedReqFields = [];
     this.addedFields = [];
-    this.recreateIds = {};
     global = this;
   }
 
@@ -50,9 +49,7 @@ class App extends React.Component {
      this.addedReqFields = [...this.addedReqFields,...processFields.reqFields];
      this.addedFields = [...this.addedFields,...processFields.allFields];
      Object.assign(this.state.jsonValues, this.state.jsonValues, processFields.defaultValues);
-
      this.recreateLines[refVal][removeId] = processFields.addedLines;
-     this.recreateIds[refVal] = [...this.recreateIds[refVal],removeId];
   };
   
   removeElement = (lines, refVal, removeId) =>{
@@ -70,14 +67,7 @@ class App extends React.Component {
       this.addedReqFields = [...processFields.reqFields];
       this.addedFields = [...processFields.allFields];
       Object.assign(this.state.jsonValues, this.state.jsonValues, processFields.defaultValues);
-      delete this.recreateLines[refVal][removeId];
-      let newRecreateIds = this.recreateIds[refVal] ;
-      Object.keys(newRecreateIds).map((idIndex, index) => {
-        if(newRecreateIds[index]==removeId){
-          newRecreateIds.pop(removeId);
-        }
-      });
-      this.recreateIds[refVal] = [...newRecreateIds];
+      delete this.recreateLines[refVal][removeId];      
   };
    
   onChangeHandler = function (e) {
@@ -91,7 +81,7 @@ class App extends React.Component {
 
   saveform = () =>{
     let customeOnboardNewJson = createJson.create(this.state.jsonValues, this.state.recreateArray,
-      this.recreateLines, this.recreateIds, this.state.customerOnboardJson);
+      this.recreateLines, this.state.customerOnboardJson);
       console.log(customeOnboardNewJson)
     //let validateFields = [...this.reqFields,...this.addedReqFields];
     //let isValid = validator.validateForm(validateFields, this.state.jsonValues); 
@@ -123,12 +113,9 @@ class App extends React.Component {
   componentDidMount() {
     this.setState({ jsonValues: this.defaultValues });
     let linesobj ={};
-    let idsobj ={};
     Object.keys(this.state.recreateArray).map((recreateIndex, index) => {
       linesobj[this.state.recreateArray[index]] = {};
-      idsobj[this.state.recreateArray[index]] = [];
       Object.assign(this.recreateLines, this.recreateLines, linesobj);
-      Object.assign(this.recreateIds, this.recreateIds, idsobj);
     });    
   }
   
@@ -189,7 +176,6 @@ class App extends React.Component {
           if(section.recreate!=null && section.recreate){
             let refVal = 'recreate'+recreateCount;
             recreateCount = recreateCount + 1;
-            //this.state.recreateLines[refVal] = linesList;
             this.state.recreateArray.push(refVal);
               items.push(<div contentEditable='true' 
                               id={refVal} 

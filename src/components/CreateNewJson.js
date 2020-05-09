@@ -1,5 +1,5 @@
 this.create = (jsonValues, recreateArray,
-    recreateLines, recreateIds, customerOnboardJson) =>{
+    recreateLines, customerOnboardJson) =>{
     let pages = customerOnboardJson.PageList;
     let recreateCount = 0;
     //Pages
@@ -15,28 +15,19 @@ this.create = (jsonValues, recreateArray,
             let section = sectionList[index];
             let linesList = section.linesList;
             //reCreate
-            let reIds = recreateIds[recreateArray[recreateCount]];            
             if(section.recreate!=null && section.recreate){
-                let relines = recreateLines[recreateArray[recreateCount]];
-                let newId = "";
+                let relines = recreateLines[recreateArray[recreateCount]];                
+                //let newId = "";
                 Object.keys(relines).map((linesArry, index) => {
-                    let reline = relines[index];
-                    newId = reIds[index];
+                    let reline = relines[index];                    
                     Object.keys(reline).map((lineArry, index) => {
                       let line_arr = reline[index];
-                      let newFields = [];
-                     Object.keys(line_arr).map((line_index, index) => {
-                        var field = new Object();
-                        Object.assign(field, line_arr[index]);
-                        field.name = field.name+newId;
-                        newFields.push(field);
-                      });
-                      linesList.push({"fields":newFields});
+                      linesList.push({"fields":line_arr});                    
                     });
                 });
                 section.linesList = linesList;
                 recreateCount = recreateCount + 1;
-            }
+            }//Recreate
             //Lines List
             Object.keys(linesList).map((lineIndex, index) => {
               let line = linesList[index];

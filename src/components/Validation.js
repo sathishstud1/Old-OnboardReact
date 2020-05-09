@@ -13,14 +13,15 @@ this.addFields = (lines, id) =>{
       let addedLine = [];
       //Fields List
       Object.keys(fields).map((fieldIndex, index) => {
-        var fieldData = fields[index];
+        var fieldData = new Object();
+        Object.assign(fieldData, fields[index]);
         let name = fieldData.name+id;
         processFields.allFields.push(name);
         processFields.defaultValues[name] = fieldData.value;
         if(fieldData.required){
           processFields.reqFields.push(name);
         }
-        //fieldData.name = name;
+        fieldData.name = name;
         addedLine.push(fieldData);
       });//Fields End
       addedLines.push(addedLine);
