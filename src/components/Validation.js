@@ -69,4 +69,4 @@ this.validateForm = (validateFields, jsonValues) =>{
       }
     });
     return flag;
-  }
+}

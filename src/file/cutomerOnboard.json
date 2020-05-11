@@ -17,7 +17,7 @@
                       "name": "ssn",
                       "type": "text",
                       "required": true,
-                      "validation": "ssnValid",
+                      "validation": "number",
                       "value": "086-66-1234"
                     },
                     {
@@ -25,7 +25,7 @@
                       "name": "dob",
                       "type": "text",
                       "required": true,
-                      "validation": "dateValid",
+                      "validation": "date",
                       "value": "05/05/1990"
                     },
                     {
@@ -53,7 +53,7 @@
                       "name": "firstname",
                       "type": "text",
                       "required": true,
-                      "validation": "onlyLetters",
+                      "validation": "onlyAlphabets",
                       "value": "Satish"
                     },
                     {

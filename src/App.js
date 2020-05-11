@@ -11,10 +11,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      customerOnboardJson: customerOnboard,
-      jsonValues : {},
-      recreateArray:[]
+      customerOnboardJson: customerOnboard,      
+      recreateArray:[],
+      jsonValues : {}
     };
+    
     this.recreateLines = {};
     this.defaultValues = {};
     this.reqFields = [];
@@ -24,32 +25,37 @@ class App extends React.Component {
   }
 
   addElements = (lines, refVal) =>{
-     let temp; 
+     let prev; 
      if(!this.state[refVal]){
       this.state[refVal] = [];
      }else{
-      temp = this.state[refVal];
+      prev = this.state[refVal];
       this.state[refVal] = [];
      }
      let arr = [];
-     if(temp){
-      arr.push(...temp);
+     if(prev){
+      arr.push(...prev);
      }    
      let divId = refVal + arr.length;
      let removeId = arr.length;
+     
      arr.push(<RecreateForm data={lines} 
                             changed={this.onChangeHandler} 
                             id={divId} 
                             uniqueId ={arr.length}
-                            remove={()=>this.removeElement(lines,refVal,removeId)}/>);
-     
-     this.state[refVal].push(arr);
-     this.setState({[refVal]:arr});
+                            remove={()=>this.removeElement(lines,refVal,removeId)}/>);     
+
      let processFields = validator.addFields(lines, removeId);
      this.addedReqFields = [...this.addedReqFields,...processFields.reqFields];
      this.addedFields = [...this.addedFields,...processFields.allFields];
-     Object.assign(this.state.jsonValues, this.state.jsonValues, processFields.defaultValues);
+     let prevJsonvalues = this.state.jsonValues;
+     let newJsonValues = {};
+     Object.assign(newJsonValues, prevJsonvalues, processFields.defaultValues);     
      this.recreateLines[refVal][removeId] = processFields.addedLines;
+     this.state[refVal].push(arr);
+     this.setState({[refVal]:arr});
+     this.state.jsonValues = newJsonValues;     
+     this.setState({jsonValues:newJsonValues});
   };
   
   removeElement = (lines, refVal, removeId) =>{
@@ -67,7 +73,9 @@ class App extends React.Component {
       this.addedReqFields = [...processFields.reqFields];
       this.addedFields = [...processFields.allFields];
       Object.assign(this.state.jsonValues, this.state.jsonValues, processFields.defaultValues);
-      delete this.recreateLines[refVal][removeId];      
+      delete this.recreateLines[refVal][removeId]; 
+      console.log(this.state)
+     
   };
    
   onChangeHandler = function (e) {
@@ -81,25 +89,29 @@ class App extends React.Component {
 
   saveform = () =>{
     let customeOnboardNewJson = createJson.create(this.state.jsonValues, this.state.recreateArray,
-      this.recreateLines, this.state.customerOnboardJson);
-      console.log(customeOnboardNewJson)
+    this.recreateLines, this.state.customerOnboardJson);
+    console.log(customeOnboardNewJson)
     //let validateFields = [...this.reqFields,...this.addedReqFields];
-    //let isValid = validator.validateForm(validateFields, this.state.jsonValues); 
-    /*let postData = {
-      customerOnboardJson:this.state.customerOnboardJson,
-      jsonValues:this.state.jsonValues,
-      recreateArray:this.state.recreateArray,
-      recreateLines:this.recreateLines,
-      recreateLinesCount:this.state.recreateLinesCount
+    //let isValid = validator.validateForm(validateFields, this.state.jsonValues);    
+    /*var postData = {
+      data:JSON.stringify(customeOnboardNewJson)
     }
-    console.log(postData) 
     axios.post('http://localhost:8080/save-app-details',postData)
     .then(response => {
       console.log(response.data);
     })
     .catch(error => {
       console.log(error);
-    });*/
+    });*/   
+
+    /*axios.get('http://localhost:8080/findById/100009')
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });*/    
+
   }
   
   searchSSN = () =>{
@@ -111,6 +123,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    //this.state.jsonValues = this.defaultValues;
     this.setState({ jsonValues: this.defaultValues });
     let linesobj ={};
     Object.keys(this.state.recreateArray).map((recreateIndex, index) => {
@@ -177,6 +190,7 @@ class App extends React.Component {
             let refVal = 'recreate'+recreateCount;
             recreateCount = recreateCount + 1;
             this.state.recreateArray.push(refVal);
+            
               items.push(<div contentEditable='true' 
                               id={refVal} 
                               ref={refVal}>
