@@ -73,9 +73,7 @@ class App extends React.Component {
       this.addedReqFields = [...processFields.reqFields];
       this.addedFields = [...processFields.allFields];
       Object.assign(this.state.jsonValues, this.state.jsonValues, processFields.defaultValues);
-      delete this.recreateLines[refVal][removeId]; 
-      console.log(this.state)
-     
+      delete this.recreateLines[refVal][removeId];      
   };
    
   onChangeHandler = function (e) {
@@ -93,7 +91,7 @@ class App extends React.Component {
     console.log(customeOnboardNewJson)
     //let validateFields = [...this.reqFields,...this.addedReqFields];
     //let isValid = validator.validateForm(validateFields, this.state.jsonValues);    
-    /*var postData = {
+    var postData = {
       data:JSON.stringify(customeOnboardNewJson)
     }
     axios.post('http://localhost:8080/save-app-details',postData)
@@ -102,15 +100,7 @@ class App extends React.Component {
     })
     .catch(error => {
       console.log(error);
-    });*/   
-
-    /*axios.get('http://localhost:8080/findById/100009')
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });*/    
+    }); 
 
   }
   
@@ -123,7 +113,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    //this.state.jsonValues = this.defaultValues;
     this.setState({ jsonValues: this.defaultValues });
     let linesobj ={};
     Object.keys(this.state.recreateArray).map((recreateIndex, index) => {
