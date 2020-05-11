@@ -91,16 +91,15 @@ class App extends React.Component {
     console.log(customeOnboardNewJson)
     //let validateFields = [...this.reqFields,...this.addedReqFields];
     //let isValid = validator.validateForm(validateFields, this.state.jsonValues);    
-    var postData = {
-      data:JSON.stringify(customeOnboardNewJson)
-    }
-    axios.post('http://localhost:8080/save-app-details',postData)
+    //var postData =  customeOnboardNewJson;
+    
+    axios.post('http://localhost:8080/save-app-details',customeOnboardNewJson)
     .then(response => {
       console.log(response.data);
     })
     .catch(error => {
       console.log(error);
-    }); 
+    });
 
   }
   
