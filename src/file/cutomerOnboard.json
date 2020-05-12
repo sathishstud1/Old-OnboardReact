@@ -35,7 +35,7 @@
                       "result": "searchPopup"
                     }
                   ]
-                }                
+                }
               ]
             }
           ]
@@ -79,7 +79,7 @@
               "sectionName": "Customer Address",
               "linesList": [
                 {
-                  "fields":[
+                  "fields": [
                     {
                       "label": "Country",
                       "name": "country",
@@ -105,7 +105,7 @@
                       "type": "textarea",
                       "required": false,
                       "value": "New york"
-                    }                
+                    }
                   ]
                 },
                 {
@@ -133,7 +133,6 @@
                       "validation": "onlyNumbers",
                       "value": ""
                     }
-                    
                   ]
                 }
               ],
@@ -158,10 +157,7 @@
                       "name": "phonetype",
                       "type": "radiogroup",
                       "required": true,
-                      "values": [
-                        "Mobile phone",
-                        "Home phone"
-                      ]
+                      "values": ["Mobile phone", "Home phone"]
                     }
                   ]
                 }
@@ -198,20 +194,14 @@
                       "name": "citizen",
                       "type": "radiogroup",
                       "required": true,
-                      "values": [
-                        "Yes",
-                        "No"
-                      ]
+                      "values": ["Yes", "No"]
                     },
                     {
                       "label": "Do you have a dual citizenship?",
                       "name": "dualcitizen",
                       "type": "radiogroup",
                       "required": true,
-                      "values": [
-                        "Yes",
-                        "No"
-                      ]
+                      "values": ["Yes", "No"]
                     }
                   ]
                 }
@@ -237,9 +227,143 @@
               ]
             }
           ]
-        }        
+        }
       ]
-    } 
-    
+    },
+    {
+      "PageTitle": "Page 2",
+      "CategoryList": [
+        {
+          "categoryTitle": "Product onboard",
+          "sectionList": [
+            {
+              "sectionName": "Add product",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Productname",
+                      "name": "productname",
+                      "type": "text",
+                      "required": true,
+                      "validation": "",
+                      "value": "CreditCard"
+                    }
+                  ]
+                },
+                {
+                  "fields": [
+                    {
+                      "label": "Amount Requested",
+                      "name": "amount",
+                      "type": "text",
+                      "required": true,
+                      "validation": "",
+                      "value": "10,000"
+                    }
+                  ]
+                },
+                {
+                  "fields": [
+                    {
+                      "label": "Term",
+                      "name": "term",
+                      "type": "text",
+                      "required": true,
+                      "validation": "number",
+                      "value": "60"
+                    }
+                  ]
+                }
+              ],
+              "recreate": true,
+              "recreatelabel": "Add another product"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "PageTitle": "Page 2",
+      "CategoryList": [
+        {
+          "categoryTitle": "Product onboard",
+          "sectionList": [
+            {
+              "sectionName": "Add product",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Productname",
+                      "name": "productname",
+                      "type": "text",
+                      "required": true,
+                      "validation": "",
+                      "value": "CreditCard"
+                    }
+                  ]
+                },
+                {
+                  "fields": [
+                    {
+                      "label": "Amount Requested",
+                      "name": "amount",
+                      "type": "text",
+                      "required": true,
+                      "validation": "",
+                      "value": "10,000"
+                    }
+                  ]
+                },
+                {
+                  "fields": [
+                    {
+                      "label": "Term",
+                      "name": "term",
+                      "type": "text",
+                      "required": true,
+                      "validation": "number",
+                      "value": "60"
+                    }
+                  ]
+                }
+              ],
+              "recreate": true,
+              "recreatelabel": "Add another product"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "PageTitle": "Page 3",
+      "CategoryList": [
+        {
+          "categoryTitle": "Search application",
+          "sectionList": [
+            {
+              "sectionName": "Search By Appid",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Search By",
+                      "name": "Searchby",
+                      "type": "select",
+                      "link": "searchcriteria",
+                      "required": true,
+                      "value": "Appid"
+                    }
+                  ]
+                }
+              ],
+              "recreate": "",
+              "recreatelabel": ""
+            }
+          ]
+        }
+      ]
+    }
   ]
 }
