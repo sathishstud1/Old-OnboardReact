@@ -78,8 +78,8 @@ class FormModel extends React.Component {
              break;
              case('button'):
                 formfields.push(<button onClick={fieldData.clicked} style={mystyle} id={fieldData.name} 
-                  type={fieldData.type}>{fieldData.label}</button>);
-              
+                  type={fieldData.type}>{fieldData.label}</button>);                 
+              break;
             default:
                 formfields.push(<br/>);
         }

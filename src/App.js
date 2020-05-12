@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
 import RecreateForm from './components/RecreateForm';
-import FormModel from './components/FormModel';
 import customerOnboard from './file/cutomerOnboard.json';
 import validator from './components/Validation';
-import axios from 'axios';
 import createJson from './components/CreateNewJson';
+import CreatePage from './components/CreatePage';
+import axios from 'axios';
+import ReactDOM from 'react-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,13 +15,14 @@ class App extends React.Component {
       customerOnboardJson: customerOnboard,      
       recreateArray:[],
       jsonValues : {}
-    };
-    
+    };    
     this.recreateLines = {};
     this.defaultValues = {};
     this.reqFields = [];
     this.addedReqFields = [];
     this.addedFields = [];
+    this.PageLength = 0;
+    this.PageList = [];
     global = this;
   }
 
@@ -56,6 +58,8 @@ class App extends React.Component {
      this.setState({[refVal]:arr});
      this.state.jsonValues = newJsonValues;     
      this.setState({jsonValues:newJsonValues});
+     console.log(this.state)
+     console.log(this.recreateLines)
   };
   
   removeElement = (lines, refVal, removeId) =>{
@@ -84,14 +88,64 @@ class App extends React.Component {
       global.state.jsonValues[e.target.id] = e.target.value;
     }
   }
+  
+  searchSSN = () =>{}
+  exitform = () =>{
+    alert('exit')
+  }
 
+  addrecreateDiv = (refVal) =>{
+    return this.state[refVal];
+  }
+
+  loadPageDefaults = (reqFields,recreateArray,defaultValues) =>{
+    this.reqFields = [...this.reqFields,...reqFields];
+    this.state.recreateArray = [...this.state.recreateArray,...recreateArray];
+    Object.assign(this.defaultValues, this.defaultValues, defaultValues);
+  }
+
+  previous = () =>{
+    if(this.CurrentPageId==0){
+      return;
+    }
+    this.CurrentPageId = this.CurrentPageId - 1;
+    if(this.CurrentPageId==0){      
+      ReactDOM.findDOMNode(this.refs["PrevBtn"]).style.display='none';
+      ReactDOM.findDOMNode(this.refs["NextBtn"]).style.display='block';
+    }else{
+      ReactDOM.findDOMNode(this.refs["NextBtn"]).style.display='block';
+      ReactDOM.findDOMNode(this.refs["PrevBtn"]).style.display='block';
+    }  
+    for(let i=0;i<this.PageLength;i++){
+      ReactDOM.findDOMNode(this.refs["ShowPage"+i]).style.display='none';
+    }
+    ReactDOM.findDOMNode(this.refs["ShowPage"+this.CurrentPageId]).style.display='block';
+  }
+
+  next = () =>{
+    if(this.CurrentPageId==this.PageLength-1){
+      return;
+    }
+    this.CurrentPageId = this.CurrentPageId + 1;
+    if(this.CurrentPageId==this.PageLength-1){      
+      ReactDOM.findDOMNode(this.refs["NextBtn"]).style.display='none';
+      ReactDOM.findDOMNode(this.refs["PrevBtn"]).style.display='block';
+    }else{
+      ReactDOM.findDOMNode(this.refs["NextBtn"]).style.display='block';
+      ReactDOM.findDOMNode(this.refs["PrevBtn"]).style.display='block';
+    }
+    for(let i=0;i<this.PageLength;i++){
+      ReactDOM.findDOMNode(this.refs["ShowPage"+i]).style.display='none';
+    }
+    ReactDOM.findDOMNode(this.refs["ShowPage"+this.CurrentPageId]).style.display='block';
+  }
+  
   saveform = () =>{
     let customeOnboardNewJson = createJson.create(this.state.jsonValues, this.state.recreateArray,
     this.recreateLines, this.state.customerOnboardJson);
     console.log(customeOnboardNewJson)
     //let validateFields = [...this.reqFields,...this.addedReqFields];
     //let isValid = validator.validateForm(validateFields, this.state.jsonValues);    
-    //var postData =  customeOnboardNewJson;
     
     axios.post('http://localhost:8080/save-app-details',customeOnboardNewJson)
     .then(response => {
@@ -100,15 +154,6 @@ class App extends React.Component {
     .catch(error => {
       console.log(error);
     });
-
-  }
-  
-  searchSSN = () =>{
-
-  }
-
-  exitform = () =>{
-    alert('exit')
   }
 
   componentDidMount() {
@@ -118,82 +163,49 @@ class App extends React.Component {
       linesobj[this.state.recreateArray[index]] = {};
       Object.assign(this.recreateLines, this.recreateLines, linesobj);
     });    
+    console.log(this.recreateLines)
+  }
+
+  renderPage = (Page, PageId, PageLength) =>{
+    let refId = 'ShowPage'+PageId;
+    let divstyle = {
+      display:'none'
+    }
+    if(PageId==0){
+      divstyle = {}
+    }
+    return <div ref={refId} style={divstyle}><CreatePage Page ={Page} 
+                       PageLength={PageLength} 
+                       PageId = {PageId}
+                       loadPageDefaults = {this.loadPageDefaults}
+                       changed = {this.onChangeHandler}
+                       addElements = {this.addElements}
+                       addrecreateDiv = {this.addrecreateDiv}
+                       searchSSN = {this.searchSSN}
+                       saveform = {this.saveform}
+                       exitform = {this.exitform}/></div>;
   }
   
-  render() {
-    const mystyle = {
-      margin:10
-     };
-    this.reqFields = [];
-    this.state.recreateArray = [];
+  render() {    
     let items = [];
-    let recreateCount = 1;
     let pages = customerOnboard.PageList;
+    this.PageList = [];
+    this.CurrentPageId = 0;
+    this.PageLength = 0;
     //Pages
     Object.keys(pages).map((pageIndex, index) => {
-      let page = pages[index];
-      items.push(<h1>{page.PageTitle}</h1>);
-      let categoryList = page.CategoryList;
-      //Category List
-      Object.keys(categoryList).map((categoryIndex, index) => {
-        let category = categoryList[index];
-        items.push(<h1>{category.categoryTitle}</h1>);
-        let sectionList = category.sectionList;
-        //Section List
-        Object.keys(sectionList).map((sectionIndex, index) => {
-          let section = sectionList[index];
-          items.push(<label style={mystyle}>{section.sectionName}</label>);
-          let linesList = section.linesList;
-          //Lines List
-          Object.keys(linesList).map((lineIndex, index) => {
-            let line = linesList[index];
-            let arr = [];
-            let fields = line.fields;
-            //Fields List
-            Object.keys(fields).map((fieldIndex, index) => {
-              var fieldData = fields[index];
-              if(fieldData.required){
-                this.reqFields.push(fieldData.name);
-              }              
-              if(fieldData.type=="button"){
-                if(fieldData.name==""){
-                  fieldData.clicked = this.searchSSN;
-                }else if(fieldData.name=="save"){
-                  fieldData.clicked = this.saveform;
-                }
-                else if(fieldData.name=="exit"){
-                  fieldData.clicked = this.exitform;
-                }
-              }else{
-                this.defaultValues[fieldData.name] = fieldData.value;
-              }
-              arr.push(fieldData);
-            });//Fields End
-            if(arr.length!=0){
-              items.push(<FormModel data={arr} changed={this.onChangeHandler}/>);
-              items.push(<br/>);
-          } 
-          });//Lines End
-          if(section.recreate!=null && section.recreate){
-            let refVal = 'recreate'+recreateCount;
-            recreateCount = recreateCount + 1;
-            this.state.recreateArray.push(refVal);
-            
-              items.push(<div contentEditable='true' 
-                              id={refVal} 
-                              ref={refVal}>
-                                {this.state[refVal]}
-                          </div>);
-              items.push(<button onClick={()=>this.addElements(linesList, refVal)} style={mystyle}
-              type="button" >{section.recreatelabel}</button>);
-          }
-        });//Sections End
-      });//Category End
-    });//Pages End
+      this.PageList.push(pages[index]);      
+    });
+    this.PageLength = this.PageList.length;
+    for(let i=0;i<this.PageLength;i++){
+      items.push(this.renderPage(this.PageList[i],i,this.PageLength));      
+    }  
 
     return (
-      <div style={{paddingLeft: 200}} key="personalDetails">
+      <div style={{paddingLeft: 200}} key="personalDetails">        
         {items}
+        <button onClick={this.previous} ref="PrevBtn" style={{margin:10}} id="PrevBtn" type="button">Previous</button>
+        <button onClick={this.next} ref="NextBtn" id="NextBtn" type="button">Next</button>
       </div>
           
     );

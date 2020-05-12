@@ -7,6 +7,7 @@ function renderElement (props){
     let formfield = [];
     let width = 100/arr.length;
     let uniqueId = props.uniqueId;
+    let arrLength = arr.length;
     const mystyle = {
      margin:10
     };
@@ -76,7 +77,7 @@ function renderElement (props){
           }
         });
 
-        if(lineData.length!=0){
+        if(lineData.length!=0 && index!=arrLength-1){
             formfield .push( <br/>);
         }
         

@@ -206,79 +206,7 @@
                   ]
                 }
               ]
-            },
-            {
-              "sectionName": "",
-              "linesList": [
-                {
-                  "fields": [
-                    {
-                      "label": "Save and Continue",
-                      "name": "save",
-                      "type": "button"
-                    },
-                    {
-                      "label": "Exit",
-                      "name": "exit",
-                      "type": "button"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "PageTitle": "Page 2",
-      "CategoryList": [
-        {
-          "categoryTitle": "Product onboard",
-          "sectionList": [
-            {
-              "sectionName": "Add product",
-              "linesList": [
-                {
-                  "fields": [
-                    {
-                      "label": "Productname",
-                      "name": "productname",
-                      "type": "text",
-                      "required": true,
-                      "validation": "",
-                      "value": "CreditCard"
-                    }
-                  ]
-                },
-                {
-                  "fields": [
-                    {
-                      "label": "Amount Requested",
-                      "name": "amount",
-                      "type": "text",
-                      "required": true,
-                      "validation": "",
-                      "value": "10,000"
-                    }
-                  ]
-                },
-                {
-                  "fields": [
-                    {
-                      "label": "Term",
-                      "name": "term",
-                      "type": "text",
-                      "required": true,
-                      "validation": "number",
-                      "value": "60"
-                    }
-                  ]
-                }
-              ],
-              "recreate": true,
-              "recreatelabel": "Add another product"
-            }
+            }            
           ]
         }
       ]
@@ -360,6 +288,25 @@
               ],
               "recreate": "",
               "recreatelabel": ""
+            },
+            {
+              "sectionName": "",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Save and Continue",
+                      "name": "save",
+                      "type": "button"
+                    },
+                    {
+                      "label": "Exit",
+                      "name": "exit",
+                      "type": "button"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
