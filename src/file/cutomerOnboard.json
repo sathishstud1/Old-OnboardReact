@@ -259,6 +259,25 @@
               ],
               "recreate": true,
               "recreatelabel": "Add another product"
+            },
+            {
+              "sectionName": "",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Save and Continue",
+                      "name": "save",
+                      "type": "button"
+                    },
+                    {
+                      "label": "Exit",
+                      "name": "exit",
+                      "type": "button"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -288,25 +307,6 @@
               ],
               "recreate": "",
               "recreatelabel": ""
-            },
-            {
-              "sectionName": "",
-              "linesList": [
-                {
-                  "fields": [
-                    {
-                      "label": "Save and Continue",
-                      "name": "save",
-                      "type": "button"
-                    },
-                    {
-                      "label": "Exit",
-                      "name": "exit",
-                      "type": "button"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         }
