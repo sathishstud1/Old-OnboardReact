@@ -282,48 +282,6 @@
           ]
         }
       ]
-    },
-    {
-      "PageTitle": "Page 3",
-      "CategoryList": [
-        {
-          "categoryTitle": "Applications",
-          "sectionList": [
-            {
-              "sectionName": "Search By Appid",
-              "linesList": [
-                {
-                  "fields": [
-                    {
-                      "label": "Search By",
-                      "name": "Searchby",
-                      "type": "text",
-                      "required": true
-                    },
-                    {
-                      "label": "",
-                      "name": "",
-                      "type": "select",
-                      "link": "searchApps",
-                      "required": true,
-                      "value": ""
-                    },
-                    {
-                      "label": "",
-                      "name": "",
-                      "type": "text",
-                      "required": true,
-                      "value": "100037"
-                    }
-                  ]
-                }
-              ],
-              "recreate": "",
-              "recreatelabel": ""
-            }
-          ]
-        }
-      ]
-    }
+    }    
   ]
 }
