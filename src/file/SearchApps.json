@@ -1,0 +1,76 @@
+{
+  "page": "Pages",
+  "PageList": [
+    {
+      "PageTitle": "Applications",
+      "CategoryList": [
+        {
+          "categoryTitle": "Search application",
+          "sectionList": [
+            {
+              "sectionName": "Search By ",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Search By",
+                      "name": "Searchby",
+                      "type": "label"
+                    },
+                    {
+                      "label": "",
+                      "name": "",
+                      "type": "select",
+                      "link": "searchApps",
+                      "value": ""
+                    },
+                    {
+                      "label": "",
+                      "name": "",
+                      "type": "text",
+                      "required": true,
+                      "value": "100037"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sectionName": "Search Result",
+              "linesList": [
+                {
+                  "fields": [
+                    {
+                      "label": "Search Result",
+                      "name": "searchresult",
+                      "type": "label"
+                    }
+                  ]
+                },
+                {
+                  "fields": [
+                    {
+                      "label": "Result Table",
+                      "name": "resulttable",
+                      "type": "table",
+                      "link": "searchtable"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "PageTitle": "Display Page1andPage2",
+      "CategoryList": [
+        {
+          "categoryTitle": "Search Result",
+          "sectionList": []
+        }
+      ]
+    }
+  ]
+}

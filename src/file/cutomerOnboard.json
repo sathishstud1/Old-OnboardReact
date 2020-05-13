@@ -206,7 +206,7 @@
                   ]
                 }
               ]
-            }            
+            }
           ]
         }
       ]
@@ -287,7 +287,7 @@
       "PageTitle": "Page 3",
       "CategoryList": [
         {
-          "categoryTitle": "Search application",
+          "categoryTitle": "Applications",
           "sectionList": [
             {
               "sectionName": "Search By Appid",
@@ -297,10 +297,23 @@
                     {
                       "label": "Search By",
                       "name": "Searchby",
+                      "type": "text",
+                      "required": true
+                    },
+                    {
+                      "label": "",
+                      "name": "",
                       "type": "select",
-                      "link": "searchcriteria",
+                      "link": "searchApps",
                       "required": true,
-                      "value": "Appid"
+                      "value": ""
+                    },
+                    {
+                      "label": "",
+                      "name": "",
+                      "type": "text",
+                      "required": true,
+                      "value": "100037"
                     }
                   ]
                 }

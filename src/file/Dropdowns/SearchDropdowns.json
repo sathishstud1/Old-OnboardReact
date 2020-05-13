@@ -1,0 +1,4 @@
+{
+  "searchApps": ["Appid", "SSN", "FirstName"],
+  "searchtable": ["Appid", "FirstName", "lastName", "Date", "BusinessName"]
+}
