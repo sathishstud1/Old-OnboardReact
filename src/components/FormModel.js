@@ -1,5 +1,5 @@
 import React from 'react';
-import countries from "../file/countries.json";
+import countries from "../file/Dropdowns/countries.json";
 
 class FormModel extends React.Component {
   constructor(props) {
@@ -68,6 +68,12 @@ class FormModel extends React.Component {
                     })
                 }else if(link=="states"){
         
+                }else if(link=="self"){
+                  var optList = fieldData.options;
+                  optList.map((optIndex, key) =>{
+                    let opt = optList[key];
+                    options.push(<option value={opt.value}>{opt.label}</option>);
+                  });
                 }
                 formfields.push(<select ref={fieldData.name} 
                                         id={fieldData.name} 
@@ -77,8 +83,17 @@ class FormModel extends React.Component {
                                 </select>);
              break;
              case('button'):
-                formfields.push(<button onClick={fieldData.clicked} style={mystyle} id={fieldData.name} 
-                  type={fieldData.type}>{fieldData.label}</button>);                 
+              if(fieldData.name=="searchBtn"){
+                formfields.push(<button onClick={this.props.searchHandler} style={mystyle} id={fieldData.name} 
+                  type={fieldData.type}>{fieldData.label}</button>);   
+              }else{
+                formfields.push(<button onClick={fieldData.clicked} 
+                                        style={mystyle} id={fieldData.name} 
+                                        type={fieldData.type}>
+                                    {fieldData.label}
+                                </button>);   
+              }
+                              
               break;
             default:
                 formfields.push(<br/>);

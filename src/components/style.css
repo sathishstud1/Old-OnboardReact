@@ -1,3 +1,16 @@
-.Input {
-    margin-right:20px
+.resptable {
+    width: 100%;
+    display: table;
+    }
+.resptableheader{
+    display: table-header-group;
+    background-color: gray;
+    font-weight: bold;
+    font-size: 25px;
+}
+.tableheadercell{
+    display: table-cell;
+    padding: 10px;
+    text-align: justify;
+    border-bottom: 1px solid black;
 }
