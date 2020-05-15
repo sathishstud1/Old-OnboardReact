@@ -3,31 +3,37 @@ import CustomerOnboard from './components/CustomerOnboard';
 import SearchApp from './components/SearchApp';
 import {Route, Link, Switch, Redirect } from 'react-router-dom';
 
-class Home extends React.Component { 
-    constructor(props) {
-        super(props)
-    }
-    
-  render() {
-      const liStyle = {
-        display: 'inline',
-        padding: 30
-      }
-      
-    return (
-        <div> 
-          <header>
+export default function Home() {
+  const liStyle = {
+    display: 'inline',
+    padding: 30
+  }
+  return (
+       <div>  
+          <main>
             <nav>
-              <li style={liStyle}><Link to="/">Pages</Link></li>
-              <li style={liStyle}><Link to="/search"> Seach Application</Link></li>
+              <ul>          
+                <li ><Link to="/">Pages</Link></li>
+                <li ><Link to="/search"> Seach Application</Link></li>
+              </ul>
             </nav>
-          </header> 
-          <Switch> 
-              <Route Path = '/search' component={SearchApp}></Route>         
-              <Route exact Path ='/' component={CustomerOnboard}></Route>
-          </Switch>         
+            <Switch>
+              <Route path="/" exact component={Pages} />
+              <Route path="/search"  component={Search} />              
+            </Switch>
+          </main>        
         </div>
     );
-  }
 }
-export default Home;
+
+const Pages = () => (
+  <div>
+    <CustomerOnboard/>
+  </div>
+);
+
+const Search = () => (
+  <div>
+    <SearchApp/>
+  </div>
+);

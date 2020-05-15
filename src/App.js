@@ -1,21 +1,12 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter as Router} from "react-router-dom";
 import Home from './Home';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);    
-  } 
-  
-  render() {      
-    return (
-      <BrowserRouter>
-        <div > 
-          <Home/>    
-        </div>
-      </BrowserRouter>          
-    );
-  }
+export default function App() {
+  return (
+   <Router>
+      <Home/>
+   </Router>
+  );
 }
-export default App;

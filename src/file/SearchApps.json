@@ -2,7 +2,7 @@
     "page": "Search application",
     "sectionList":[
       {
-        "sectionName": "Search By",
+        "sectionName": "",
         "isSearch":true,
         "fields": [                    
               {
@@ -29,7 +29,7 @@
                 "name": "searchValue",
                 "type": "text",
                 "required": true,
-                "value": "1"
+                "value": ""
               },
               {
                 "label": "Search",
@@ -41,8 +41,8 @@
       {
         "sectionName": "Search Result",
         "isTable":true,
-        "ColumnLabels": ["App Id","First Name","Last Name"],
-        "ColumnIds":["_id", "firstname", "lastname"]
+        "ColumnLabels": ["App Id","First Name","Last Name","SSN"],
+        "ColumnIds":["_id", "firstname", "lastname","ssn"]
       }
     ]   
 }

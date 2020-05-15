@@ -41,8 +41,6 @@ class SearchApp extends React.Component {
   }
 
   renderTable = (data) =>{
-    console.log(data);
-
     let arr = [];
     arr.push(<CreateTable columnLabels = {this.columnLabels}
                           columnIds = {this.columnIds} 
