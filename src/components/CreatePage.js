@@ -3,14 +3,14 @@ import FormModel from './FormModel';
 
 class CreatePage extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);    
     this.reqFields = [];
     this.recreateArray = [];
     this.defaultValues = {};
-  }
+  } 
 
   componentDidMount() {
-    this.props.loadPageDefaults(this.reqFields,this.recreateArray,this.defaultValues);
+    this.props.loadPageDefaults(this.reqFields,this.recreateArray,this.defaultValues);    
   }
   
   render() {
@@ -60,7 +60,9 @@ class CreatePage extends React.Component {
               arr.push(fieldData);
             });//Fields End
             if(arr.length!=0){
-              items.push(<FormModel data={arr} changed={this.props.changed}/>);
+              items.push(<FormModel data={arr} 
+                                    changed={this.props.changed}
+                                    stateOptions={this.props.stateOptions}/>);
               items.push(<br/>);
           } 
           });//Lines End

@@ -86,7 +86,7 @@
                       "type": "select",
                       "link": "countries",
                       "required": true,
-                      "value": ""
+                      "value": "US"
                     }
                   ]
                 },
@@ -123,7 +123,8 @@
                       "type": "select",
                       "link": "states",
                       "required": true,
-                      "value": ""
+                      "dependent":true,
+                      "value": "AL"
                     },
                     {
                       "label": "ZIP Code",
@@ -282,6 +283,6 @@
           ]
         }
       ]
-    }    
+    }  
   ]
 }

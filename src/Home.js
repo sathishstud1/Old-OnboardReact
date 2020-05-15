@@ -11,7 +11,7 @@ export default function Home() {
   return (
        <div>  
           <main>
-            <nav>
+            <nav style={{width: '12%',float: 'left'}}>
               <ul>          
                 <li ><Link to="/">Pages</Link></li>
                 <li ><Link to="/search"> Seach Application</Link></li>

@@ -1,9 +1,10 @@
 import React from 'react';
 import countries from "../file/Dropdowns/countries.json";
+import states from "../file/Dropdowns/states.json";
 
 class FormModel extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);    
   }
 
   render() {
@@ -67,7 +68,11 @@ class FormModel extends React.Component {
                       
                     })
                 }else if(link=="states"){
-        
+                    let statesList = states.US;
+                    statesList.map((stateKey, key) =>{
+                      let state = statesList[key];
+                      options.push(<option value={state.value}>{state.label}</option>);
+                    });
                 }else if(link=="self"){
                   var optList = fieldData.options;
                   optList.map((optIndex, key) =>{
@@ -75,12 +80,22 @@ class FormModel extends React.Component {
                     options.push(<option value={opt.value}>{opt.label}</option>);
                   });
                 }
-                formfields.push(<select ref={fieldData.name} 
-                                        id={fieldData.name} 
-                                        onChange={this.props.changed} 
-                                        style = {mystyle}>
-                                  {options}
-                                </select>);
+                if(typeof fieldData.dependent!='undefined' && fieldData.dependent){
+                  formfields.push(<select ref={fieldData.name} 
+                                          id={fieldData.name}                                          
+                                          onChange={this.props.changed} 
+                                          style = {mystyle}>
+                                      {this.props.stateOptions}
+                                    </select>);
+                }else{
+                  formfields.push(<select ref={fieldData.name} 
+                                          id={fieldData.name} 
+                                          onChange={this.props.changed} 
+                                          style = {mystyle}>
+                                    {options}
+                                  </select>);
+                }
+                
              break;
              case('button'):
               if(fieldData.name=="searchBtn"){
