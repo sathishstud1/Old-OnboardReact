@@ -1,6 +1,5 @@
 import React from 'react';
 import RecreateForm from './RecreateForm';
-import customerOnboard from '../file/cutomerOnboard.json';
 import validator from '../components/Validation';
 import createJson from '../components/CreateNewJson';
 import CreatePage from '../components/CreatePage';
@@ -13,7 +12,7 @@ class CustomerOnboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      customerOnboardJson: customerOnboard,      
+      customerOnboardJson: this.props.json,      
       recreateArray:[],
       jsonValues : {},
       stateOptions : []
@@ -182,7 +181,7 @@ class CustomerOnboard extends React.Component {
   render() {    
     let items = [];
     let tabs = [];
-    let pages = customerOnboard.PageList;
+    let pages = this.props.json.PageList;
     this.PageList = [];
     this.CurrentPageId = 0;
     this.PageLength = 0;

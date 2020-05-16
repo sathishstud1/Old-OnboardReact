@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './style.css';
+import {Link} from 'react-router-dom';
+
 
 const resptable ={
     width: '80%',
@@ -29,6 +31,7 @@ const resptablebody = {
 }
 function renderHeader (columnLabels){    
     let items = [];
+    items.push(<div style={tableheadercell}>Open Record</div>);
     Object.keys(columnLabels).map((columnIndex, index) => {
         items.push(<div style={tableheadercell}>{columnLabels[index]}</div>);
     });   
@@ -38,12 +41,25 @@ function renderHeader (columnLabels){
 function renderBody (columnIds, data){    
     let arr = [];
     Object.keys(data).map((dataIndex, index) => {
-        let row = JSON.parse(data[index]);       
-        Object.keys(columnIds).map((columnIndex, index) => {
-          arr.push(<div style={tablebodycell}>{row[columnIds[index]]}</div>);
-        });        
+        let row = JSON.parse(data[index]);   
+        arr.push(<div style={resptablerow}>
+            <div style={tablebodycell}><Link to = {'/'+row['appId']}>{row['appId']}</Link></div>            
+            {getCells(columnIds,row)}
+            </div>);      
       }); 
     return arr;
+}
+
+function getCells(columnIds,row){
+    let arr = [];
+    Object.keys(columnIds).map((columnIndex, index) => {
+        arr.push(<div style={tablebodycell}>{row[columnIds[index]]}</div>);
+    });
+    return arr;
+}
+
+function openRecord(appId){
+ alert(appId)
 }
 
 const CreateTable = props => (
