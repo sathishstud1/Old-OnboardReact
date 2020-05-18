@@ -2,13 +2,13 @@
   "page": "Pages",
   "PageList": [
     {
-      "PageTitle": "Page 1",
+      "PageTitle": "Business and Principle Details",
       "CategoryList": [
         {
-          "categoryTitle": "Search Customer",
+          "categoryTitle": "Principle/Customer Details",
           "sectionList": [
             {
-              "sectionName": "Create Application",
+              "sectionName": "Basic Info",
               "linesList": [
                 {
                   "fields": [
@@ -29,23 +29,13 @@
                       "value": "05/05/1990"
                     },
                     {
-                      "label": "Enter",
+                      "label": "Click here if you are already customer to the bank",
                       "name": "search",
                       "type": "button",
                       "result": "searchPopup"
                     }
                   ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "categoryTitle": "Customer Details",
-          "sectionList": [
-            {
-              "sectionName": "Basic Info",
-              "linesList": [
+                },
                 {
                   "fields": [
                     {
@@ -123,7 +113,7 @@
                       "type": "select",
                       "link": "states",
                       "required": true,
-                      "dependent":true,
+                      "dependent": true,
                       "value": "AL"
                     },
                     {
@@ -213,7 +203,7 @@
       ]
     },
     {
-      "PageTitle": "Page 2",
+      "PageTitle": "Product Details",
       "CategoryList": [
         {
           "categoryTitle": "Product onboard",
@@ -267,7 +257,7 @@
                 {
                   "fields": [
                     {
-                      "label": "Save and Continue",
+                      "label": "Apply",
                       "name": "save",
                       "type": "button"
                     },
@@ -283,6 +273,6 @@
           ]
         }
       ]
-    }  
+    }
   ]
 }
