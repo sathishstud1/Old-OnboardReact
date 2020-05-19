@@ -41,8 +41,8 @@
       {
         "sectionName": "Search Result",
         "isTable":true,
-        "ColumnLabels": ["App Id","First Name","Last Name","SSN"],
-        "ColumnIds":["_id", "firstname", "lastname","ssn"]
+        "ColumnLabels": ["First Name","Last Name","SSN"],
+        "ColumnIds":["firstname", "lastname","ssn"]
       }
     ]   
 }

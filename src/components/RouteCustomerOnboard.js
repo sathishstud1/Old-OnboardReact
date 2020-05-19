@@ -26,8 +26,7 @@ class RouteCustomerOnboard extends React.Component {
         });
   }
 
-  render() {
-   
+  render() {   
     if(this.state.loading){
         return <span>Loading....</span>
     }   

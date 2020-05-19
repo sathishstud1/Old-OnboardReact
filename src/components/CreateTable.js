@@ -31,7 +31,7 @@ const resptablebody = {
 }
 function renderHeader (columnLabels){    
     let items = [];
-    items.push(<div style={tableheadercell}>Open Record</div>);
+    items.push(<div style={tableheadercell}>App Id</div>);
     Object.keys(columnLabels).map((columnIndex, index) => {
         items.push(<div style={tableheadercell}>{columnLabels[index]}</div>);
     });   
