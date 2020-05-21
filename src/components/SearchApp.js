@@ -4,7 +4,8 @@ import SearchAppjson from "../file/SearchApps.json";
 import FormModel from "./FormModel";
 import CreateTable from "./CreateTable";
 import axios from "axios";
-import { Link, Redirect } from "react-router-dom";
+import Header from './layout/Header';
+import LeftNav from './layout/LeftNav';
 
 class SearchApp extends React.Component {
   constructor(props) {
@@ -87,24 +88,10 @@ class SearchApp extends React.Component {
     });
     return (
       <div className='white-overlay'>
-        <h1 className='x-large'>Digital UnderWritting System</h1>
-        <div className='buttons'>
-          <nav style={{ width: "12%", float: "left" }}>
-            <ul>
-              <li>
-                <Link to='/home'>Home</Link>
-              </li>
-              <li>
-                <Link to='/newApplication'>Create Application</Link>
-              </li>
-              <li>
-                <Link to='/search'> Seach Application</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div style={{ paddingLeft: 200 }}>{items}</div>
-      </div>
+        <Header/> 
+        <LeftNav/>
+        <div style={{ paddingLeft: 200 }}>{items}</div>           
+    </div>      
     );
   }
 }

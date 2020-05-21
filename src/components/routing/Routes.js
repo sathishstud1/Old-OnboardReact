@@ -1,15 +1,17 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Login from "../layout/Login";
+import Dashboard from "../layout/Dashboard";
 import SearchApp from "../SearchApp";
 import RouteCustomerOnboard from "../RouteCustomerOnboard";
 import Landing from "../layout/Landing";
+import Login from "../layout/Login";
 
 const Routes = () => {
   return (
     <section className='container'>
       <Switch>
         <Route exact path='/' component={Landing} />
+        <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/home' component={Landing} />
         <Route path='/newApplication' exact component={Pages} />

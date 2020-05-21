@@ -7,6 +7,8 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import {withRouter} from 'react-router';
 import states from "../file/Dropdowns/states.json";
+import Header from './layout/Header';
+import LeftNav from './layout/LeftNav';
 
 class CustomerOnboard extends React.Component {
   constructor(props) {
@@ -197,9 +199,11 @@ class CustomerOnboard extends React.Component {
     }  
 
     return (
-      <div style={{paddingLeft: 200}} key="personalDetails">         
+      <div>
+        <Header/> 
+        <LeftNav/> 
         {tabs}
-        {items}
+        <div style={{paddingLeft: '16.5%'}}>{items} </div>         
       </div>
           
     );
