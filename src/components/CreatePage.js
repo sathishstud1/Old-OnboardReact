@@ -22,7 +22,7 @@ class CreatePage extends React.Component {
     let items = [];
     let recreateCount = 1;
     let page = this.props.Page;
-      items.push(<h1>{page.PageTitle}</h1>);
+      //items.push(<h1>{page.PageTitle}</h1>);
       let categoryList = page.CategoryList;
       //Category List
       Object.keys(categoryList).map((categoryIndex, index) => {

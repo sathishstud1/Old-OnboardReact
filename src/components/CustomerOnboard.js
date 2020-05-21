@@ -147,6 +147,38 @@ class CustomerOnboard extends React.Component {
     }
     ReactDOM.findDOMNode(this.refs[pageId]).style.display='block';
   }
+
+  nextPage = (pageId) =>{
+    
+    if(this.CurrentPageId==(this.PageLength-1)){
+      return;
+    }
+    ReactDOM.findDOMNode(this.refs["previousBtn"]).style.display='block';
+    this.CurrentPageId = this.CurrentPageId + 1;
+    if(this.CurrentPageId==(this.PageLength-1)){
+      ReactDOM.findDOMNode(this.refs["nextBtn"]).style.display='none';
+    }
+    for(let i=0;i<this.PageLength;i++){
+      ReactDOM.findDOMNode(this.refs["ShowPage"+i]).style.display='none';
+    }
+    ReactDOM.findDOMNode(this.refs["ShowPage"+this.CurrentPageId]).style.display='block';
+  }
+
+  previousPage = (pageId) =>{
+    if(this.CurrentPageId==0){
+      return;
+    }
+    ReactDOM.findDOMNode(this.refs["nextBtn"]).style.display='block';
+    
+    this.CurrentPageId = this.CurrentPageId - 1;
+    if(this.CurrentPageId==0){
+      ReactDOM.findDOMNode(this.refs["previousBtn"]).style.display='none';
+    }
+    for(let i=0;i<this.PageLength;i++){
+      ReactDOM.findDOMNode(this.refs["ShowPage"+i]).style.display='none';
+    }
+    ReactDOM.findDOMNode(this.refs["ShowPage"+this.CurrentPageId]).style.display='block';
+  }
   
   saveform = () =>{
     let customeOnboardNewJson = createJson.create(this.state.jsonValues, this.state.recreateArray,
@@ -207,6 +239,7 @@ class CustomerOnboard extends React.Component {
     }    
     let items = [];
     let tabs = [];
+    let btns = [];
     let pages = this.props.json.PageList;
     this.PageList = [];
     this.CurrentPageId = 0;
@@ -221,13 +254,24 @@ class CustomerOnboard extends React.Component {
       tabs.push(<button style={{marginRight:20,marginTop:20}} onClick={()=>this.changePage('ShowPage'+i)} id={tabId} type="button">{this.PageList[i].PageTitle}</button>);
       items.push(this.renderPage(this.PageList[i],i,this.PageLength));      
     }  
+    btns.push(<button style={{marginRight:20,marginTop:20}}
+                      ref="previousBtn"
+                      onClick={()=>this.previousPage()} 
+                      type="button">
+                Previous</button>);
+    btns.push(<button style={{marginRight:20,marginTop:20}}
+                      ref="nextBtn" 
+                      onClick={()=>this.nextPage()} 
+                      type="button">
+                Next</button>   );
 
     return (
       <div>
         <Header/> 
         <LeftNav/> 
         {tabs}
-        <div style={{paddingLeft: '16.5%'}}>{items} </div>         
+        <div style={{paddingLeft: '16.5%'}}>{items} </div> 
+        <div style={{float: 'right',marginRight: '15%',marginTop: '-5%'}}>{btns}</div>          
       </div>
           
     );

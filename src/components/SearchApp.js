@@ -47,7 +47,7 @@ class SearchApp extends React.Component {
   };
 
   searchHandler = () => {
-    console.log(this.state);
+    
     let searchValue = this.state.jsonValues["searchValue"];
     let postData = {
       appid: searchValue,
