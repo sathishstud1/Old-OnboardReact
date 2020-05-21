@@ -9,7 +9,7 @@ class LeftNav extends React.Component {
     render() {
           
       return (
-        <div className='buttons' style={{paddingLeft:'5%', paddingTop:'1%'}}>
+        <div className='buttons' style={{paddingLeft:'5%', paddingTop:'2%'}}>
             <nav style={{ width: "12%", float: "left" }}>
             <ul>            
                 <li>

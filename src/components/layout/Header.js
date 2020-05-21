@@ -1,6 +1,7 @@
 import React from "react";
 import { gapi } from 'gapi-script';
 import {  Redirect } from "react-router-dom";
+import GoogleLogout from 'react-google-login';
 
 class Header extends React.Component {
     constructor(props) {
@@ -40,10 +41,14 @@ class Header extends React.Component {
         </head>
             <div>              
                 <h1 className='x-large' style={{width: '80%',float: 'left'}}>Digital UnderWritting System</h1>
-                <button onClick={this.signOut} 
-                        ref="signoutBtn"
-                        type="button" 
-                        style={{margin: '2%',backgroundColor: 'red'}}>Log Out</button> 
+                <div style={{margin: '2%'}} >
+                    <GoogleLogout 
+                        clientId="1020592783279-dib7nfhpbecp4gluf277pkj072shfqaj.apps.googleusercontent.com"
+                        buttonText="Logout" 
+                        theme="dark"
+                        onSuccess={this.signOut}
+                        />
+                </div>
             </div>                       
         </div>
       );
