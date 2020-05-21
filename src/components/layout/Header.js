@@ -40,7 +40,7 @@ class Header extends React.Component {
             <meta name="google-signin-client_id" content="1020592783279-dib7nfhpbecp4gluf277pkj072shfqaj.apps.googleusercontent.com"></meta>
         </head>
             <div>              
-                <h1 className='x-large' style={{width: '80%',float: 'left'}}>Digital UnderWritting System</h1>
+                <h1 className='x-large' style={{width: '80%',float: 'left', paddingLeft: '5%'}}>Digital UnderWritting System</h1>
                 <div style={{margin: '2%'}} >
                     <GoogleLogout 
                         clientId="1020592783279-dib7nfhpbecp4gluf277pkj072shfqaj.apps.googleusercontent.com"

@@ -44,7 +44,7 @@ onSignInFailure = ()=>{
     }
     return (
       <section className='landing'>
-      <div className='dark-overlay'>
+      <div className='dark-overlay' style={{  paddingTop: '25%'}}>
         <div className='landing-inner'>
           <h1 className='x-large'>Digital UnderWritting System</h1>
           <p className='lead'>
