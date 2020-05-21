@@ -157,11 +157,11 @@ class CustomerOnboard extends React.Component {
     
     axios.post('http://localhost:8080/save-app-details',customeOnboardNewJson)
     .then(response => {
-      console.log(response.data);
+      alert(response.data.message);
     })
     .catch(error => {
       console.log(error);
-    });
+    });    
   }
 
   componentDidMount() {
