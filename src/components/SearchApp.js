@@ -6,6 +6,7 @@ import CreateTable from "./CreateTable";
 import axios from "axios";
 import Header from './layout/Header';
 import LeftNav from './layout/LeftNav';
+import { Redirect } from "react-router-dom";
 
 class SearchApp extends React.Component {
   constructor(props) {
@@ -14,11 +15,30 @@ class SearchApp extends React.Component {
       SearchAppJson: SearchAppjson,
       jsonValues: {},
       searchTable: [],
+      redirect: false
     };
+    this.verifyUser();       
     this.columnLabels = [];
     this.columnIds = [];
     this.tableLabel = "";
     global = this;
+  }
+
+  async verifyUser() {    
+    let postData = {
+      id_token: localStorage.getItem('login_session_token')        
+    };
+    axios.post('http://localhost:8080/verifyGoogleLogin', postData)
+    .then(response => {
+      if(response.data.status){
+        this.setState({ redirect: false });
+      }else{
+        this.setState({ redirect: true });
+      }         
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   onChangeHandler = function (e) {
@@ -59,6 +79,9 @@ class SearchApp extends React.Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to='/login' />;
+    }   
     let items = [];
     let sectionList = SearchAppjson.sectionList;
     this.columnLabels = [];

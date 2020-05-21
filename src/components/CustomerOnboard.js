@@ -9,6 +9,8 @@ import {withRouter} from 'react-router';
 import states from "../file/Dropdowns/states.json";
 import Header from './layout/Header';
 import LeftNav from './layout/LeftNav';
+import { Redirect } from "react-router-dom";
+
 
 class CustomerOnboard extends React.Component {
   constructor(props) {
@@ -17,8 +19,10 @@ class CustomerOnboard extends React.Component {
       customerOnboardJson: this.props.json,      
       recreateArray:[],
       jsonValues : {},
-      stateOptions : []
-    };    
+      stateOptions : [],
+      redirect: false
+    };   
+    this.verifyUser();      
     this.recreateLines = {};
     this.defaultValues = {};
     this.reqFields = [];
@@ -28,7 +32,24 @@ class CustomerOnboard extends React.Component {
     this.PageList = [];
     this.defaultStates = [];
     global = this;
-  }  
+  }
+  
+  async verifyUser() {    
+    let postData = {
+      id_token: localStorage.getItem('login_session_token')        
+    };
+    axios.post('http://localhost:8080/verifyGoogleLogin', postData)
+    .then(response => {
+      if(response.data.status){
+        this.setState({ redirect: false });
+      }else{
+        this.setState({ redirect: true });
+      }         
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
 
   addElements = (lines, refVal) =>{
      let prev; 
@@ -180,7 +201,10 @@ class CustomerOnboard extends React.Component {
                        exitform = {this.exitform}/></div>;
   }
   
-  render() {    
+  render() { 
+    if (this.state.redirect) {
+      return <Redirect to='/login' />;
+    }    
     let items = [];
     let tabs = [];
     let pages = this.props.json.PageList;

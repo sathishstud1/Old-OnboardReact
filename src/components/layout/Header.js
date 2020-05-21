@@ -12,11 +12,20 @@ class Header extends React.Component {
     }
 
     signOut =()=> {
+        if(typeof gapi.auth2=='undefined'){
+            global.setState({ redirect: true });
+            return;
+        }
         var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-          localStorage.removeItem('login_session_token');
-          global.setState({ redirect: true });
-        });
+        if(auth2){
+            auth2.signOut().then(function () {
+                localStorage.removeItem('login_session_token');
+                global.setState({ redirect: true });
+              });
+        }else{
+            global.setState({ redirect: true });
+        }
+       
     }
 
     render() {

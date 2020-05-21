@@ -33,7 +33,7 @@ class RouteCustomerOnboard extends React.Component {
   
   render() {
     if (this.state.loading) {
-      return <span>Loading....</span>;
+      return <div className='white-overlay'><span>Loading....</span></div>;
     }
     return (
     <div className='white-overlay'>

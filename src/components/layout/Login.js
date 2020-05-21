@@ -2,7 +2,6 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import GoogleLogin from 'react-google-login';
-import Header from './Header';
 
 class Login extends React.Component {
     constructor(props) {
@@ -24,7 +23,7 @@ class Login extends React.Component {
         let postData = {
           id_token: googleUser.getAuthResponse().id_token         
         };
-         axios.post('http://localhost:8080/login', postData)
+         axios.post('http://localhost:8080/verifyGoogleLogin', postData)
         .then(response => {
           if(response.data.status){
             this.setState({ isAuthenticated: true });
@@ -44,7 +43,7 @@ class Login extends React.Component {
       }
       return (
         <div className='white-overlay'>                   
-            <Header/> 
+            <h1 className='x-large' style={{width: '80%',float: 'left'}}>Digital UnderWritting System</h1>
             <div className='buttons'>
                 <nav style={{ width: "25%", paddingLeft: '5%'}}>
                   <ul style={{paddingBottom: '10%'}}>
