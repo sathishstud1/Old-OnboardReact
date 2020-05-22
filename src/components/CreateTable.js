@@ -42,7 +42,7 @@ function renderBody (columnIds, data){
     Object.keys(data).map((dataIndex, index) => {
         let row = JSON.parse(data[index]);   
         arr.push(<div style={resptablerow}>
-            <div style={tablebodycell}><Link to = {'/'+row['appId']}>{row['appId']}</Link></div>            
+            <div style={tablebodycell}><Link style={{cursor: 'pointer'}} to = {'/'+row['appId']}>{row['appId']}</Link></div>            
             {getCells(columnIds,row)}
             </div>);      
       }); 

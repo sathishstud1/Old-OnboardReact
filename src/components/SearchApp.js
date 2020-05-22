@@ -21,6 +21,8 @@ class SearchApp extends React.Component {
     this.columnLabels = [];
     this.columnIds = [];
     this.tableLabel = "";
+    this.searchStrings = {};
+    this.searchTypes = {};
     global = this;
   }
 
@@ -46,17 +48,50 @@ class SearchApp extends React.Component {
     global.state.jsonValues[e.target.id] = e.target.value;
   };
 
+  isInteger = (val)=>{
+    var digits="1234567890";
+    for (var i=0; i < val.length; i++) {
+      if (digits.indexOf(val.charAt(i))==-1) { return false; }
+      }
+    return true;
+  }
+
   searchHandler = () => {
-    
+    console.log(this.searchStrings)
     let searchValue = this.state.jsonValues["searchValue"];
+    let searchCriteria = this.state.jsonValues["searchCriteria"];
+    let searchCondition = this.state.jsonValues["searchCondition"];
+    if(searchCondition==null || typeof searchCondition =='undefined'){
+      searchCondition = "=";
+    }
+
+    if(searchCriteria==null || typeof searchCriteria =='undefined'){
+      searchCriteria = "_id";
+    }else{
+      searchCriteria = this.searchStrings[searchCriteria];
+    }
+    let isInteger = false;//this.isInteger(searchValue);
+    
+    if(this.searchTypes[searchCriteria]=='number'){
+      isInteger = true;
+    }
+
     let postData = {
-      appid: searchValue,
+      searchValue: searchValue,
+      searchCondition:searchCondition,
+      searchCriteria:searchCriteria,
       columnIds: this.columnIds,
+      isInteger: isInteger
     };
     axios
-      .post("http://localhost:8080/findById", postData)
+      .post("http://localhost:8080/searchAppData", postData)
       .then((response) => {
-        this.renderTable(response.data);
+        if(response.data.status){
+          this.renderTable(response.data.data);
+        }else{
+          alert(response.data.message);
+        } 
+        
       })
       .catch((error) => {
         console.log(error);
@@ -84,6 +119,8 @@ class SearchApp extends React.Component {
     }   
     let items = [];
     let sectionList = SearchAppjson.sectionList;
+    this.searchStrings = SearchAppjson.searchStrings;
+    this.searchTypes  = SearchAppjson.searchTypes;
     this.columnLabels = [];
     //Sections
     Object.keys(sectionList).map((sectionIndex, index) => {

@@ -28,7 +28,9 @@ class Landing extends React.Component {
    .then(response => {
      if(response.data.status){
        this.setState({ isAuthenticated: true });
-     }         
+     }else{
+       alert(response.data.message);
+     }       
    })
    .catch(error => {
      console.log(error);

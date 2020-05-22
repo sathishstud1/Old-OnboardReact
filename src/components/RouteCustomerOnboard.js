@@ -20,8 +20,11 @@ class RouteCustomerOnboard extends React.Component {
   }
 
   async getJson() {
+    let postData = {
+      appId:this.appId
+    };
     return axios
-      .get("http://localhost:8080/getJson/" + this.appId)
+      .post("http://localhost:8080/getJson" ,postData)
       .then((response) => {
         if(response.data.status){
             this.json = JSON.parse(response.data.data);

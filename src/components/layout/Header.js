@@ -25,8 +25,7 @@ class Header extends React.Component {
               });
         }else{
             global.setState({ redirect: true });
-        }
-       
+        }       
     }
 
     render() {

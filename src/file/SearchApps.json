@@ -23,6 +23,27 @@
                     "value": "firstname"
                   }
                 ]
+              },{
+                "label": "",
+                "name": "searchCondition",
+                "type": "select",
+                "value": "",
+                "link":"self",
+                "options": [
+                  {
+                    "label": "Equals",
+                    "value": "="
+                  },{
+                    "label": "Contains",
+                    "value": "contains"
+                  }, {
+                    "label": "Greater Than",
+                    "value": ">"
+                  }, {
+                    "label": "Less Than",
+                    "value": "<"
+                  }
+                ]
               },
               {
                 "label": "",
@@ -44,5 +65,17 @@
         "ColumnLabels": ["First Name","Last Name","SSN"],
         "ColumnIds":["firstname", "lastname","ssn"]
       }
-    ]   
+    ],
+    "searchStrings":
+    {
+        "_id":"_id",
+        "ssn":"PageList.0.CategoryList.0.sectionList.0.linesList.0.fields.0.value",
+        "firstname":"PageList.0.CategoryList.0.sectionList.0.linesList.1.fields.0.value"
+    },
+    "searchTypes":
+    {
+      "_id":"number",
+      "ssn":"string",
+      "firstname":"string"
+    } 
 }
