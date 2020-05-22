@@ -9,9 +9,7 @@ class FormModel extends React.Component {
 
   render() {
       let arr = this.props.data;
-      let label = '';
       let formfields = [];
-      let width = 100/arr.length;
       const mystyle = {
        margin:10
       };
@@ -43,12 +41,18 @@ class FormModel extends React.Component {
             case('radiogroup'):
                 Object.keys(fieldData.values).map((value, index) => {
                     var ids = fieldData.name+index;
+                    let val = fieldData.value;
+                    let checkFlag = false;
+                    if(val && val===fieldData.values[index]){
+                      checkFlag = true;
+                    }
                     formfields.push(<input type="radio" 
-                                    onChange={this.props.changed} 
-                                    defaultValue ={fieldData.values[index]} 
-                                    name={fieldData.name} 
-                                    id={ids} 
-                                    ref={fieldData.name}></input>);
+                                      onChange={this.props.changed} 
+                                      defaultValue ={fieldData.values[index]} 
+                                      name={fieldData.name} 
+                                      id={ids} 
+                                      ref={fieldData.name} 
+                                      defaultChecked ={checkFlag}></input>);
                     formfields.push(<label >{fieldData.values[index]}</label>);
                 });
              break;
@@ -70,7 +74,7 @@ class FormModel extends React.Component {
                 }else if(link=="states"){
                     let statesList = states.US;
                     statesList.map((stateKey, key) =>{
-                      let state = statesList[key];
+                      let state = statesList[key];                      
                       options.push(<option value={state.value}>{state.label}</option>);
                     });
                 }else if(link=="self"){
