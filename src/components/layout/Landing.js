@@ -37,6 +37,12 @@ class Landing extends React.Component {
 onSignInFailure = ()=>{
  alert('Login Failed');
 }
+
+componentDidMount() {  
+  if(!navigator.cookieEnabled) {
+    alert('Cookies are disabled!! Please Enable Cookies to Access Application.');
+  }
+}
   
   render() {      
     if (this.state.isAuthenticated) {

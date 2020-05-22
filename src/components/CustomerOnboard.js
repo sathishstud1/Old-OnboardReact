@@ -145,10 +145,19 @@ class CustomerOnboard extends React.Component {
     for(let i=0;i<this.PageLength;i++){
       ReactDOM.findDOMNode(this.refs["ShowPage"+i]).style.display='none';
     }
-    ReactDOM.findDOMNode(this.refs[pageId]).style.display='block';
+    ReactDOM.findDOMNode(this.refs["ShowPage"+pageId]).style.display='block';
+    ReactDOM.findDOMNode(this.refs["previousBtn"]).style.display='block';
+    ReactDOM.findDOMNode(this.refs["nextBtn"]).style.display='block';
+    if(pageId==(this.PageLength-1)){
+      ReactDOM.findDOMNode(this.refs["nextBtn"]).style.display='none';      
+    }
+    if(pageId==0){
+      ReactDOM.findDOMNode(this.refs["previousBtn"]).style.display='none';
+    }
+    this.CurrentPageId = pageId;
   }
 
-  nextPage = (pageId) =>{
+  nextPage = () =>{
     
     if(this.CurrentPageId==(this.PageLength-1)){
       return;
@@ -158,13 +167,14 @@ class CustomerOnboard extends React.Component {
     if(this.CurrentPageId==(this.PageLength-1)){
       ReactDOM.findDOMNode(this.refs["nextBtn"]).style.display='none';
     }
+
     for(let i=0;i<this.PageLength;i++){
       ReactDOM.findDOMNode(this.refs["ShowPage"+i]).style.display='none';
     }
     ReactDOM.findDOMNode(this.refs["ShowPage"+this.CurrentPageId]).style.display='block';
   }
 
-  previousPage = (pageId) =>{
+  previousPage = () =>{
     if(this.CurrentPageId==0){
       return;
     }
@@ -251,7 +261,7 @@ class CustomerOnboard extends React.Component {
     this.PageLength = this.PageList.length;
     for(let i=0;i<this.PageLength;i++){
       let tabId = 'pagebtn' + i;
-      tabs.push(<button style={{marginRight:20,marginTop:20}} onClick={()=>this.changePage('ShowPage'+i)} id={tabId} type="button">{this.PageList[i].PageTitle}</button>);
+      tabs.push(<button style={{marginRight:20,marginTop:20}} onClick={()=>this.changePage(i)} id={tabId} type="button">{this.PageList[i].PageTitle}</button>);
       items.push(this.renderPage(this.PageList[i],i,this.PageLength));      
     }  
     btns.push(<button style={{marginRight:20,marginTop:20}}
