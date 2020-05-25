@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Dashboard from "../layout/Dashboard";
 import SearchApp from "../SearchApp";
 import RouteCustomerOnboard from "../RouteCustomerOnboard";
+import RouteBusinessOnboard from "../RouteBusinessOnboard";
 import Landing from "../layout/Landing";
 
 const Routes = () => {
@@ -12,7 +13,8 @@ const Routes = () => {
         <Route exact path='/' component={Landing} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/home' component={Landing} />
-        <Route path='/newApplication' exact component={Pages} />
+        <Route path='/customerOnboard' exact component={Pages} />
+        <Route path='/businessOnboard' exact component={BusinessPages} />
         <Route path='/search' component={Search} />
         <Route path='/:id' component={Pages} />
       </Switch>
@@ -23,6 +25,12 @@ const Routes = () => {
 const Pages = () => (
   <div>
     <RouteCustomerOnboard />
+  </div>
+);
+
+const BusinessPages = () => (
+  <div>
+    <RouteBusinessOnboard />
   </div>
 );
 

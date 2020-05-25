@@ -1,81 +1,85 @@
-{ 
-    "page": "Search application",
-    "sectionList":[
-      {
-        "sectionName": "",
-        "isSearch":true,
-        "fields": [                    
-              {
-                "label": "Search By",
-                "name": "searchCriteria",
-                "type": "select",
-                "value": "",
-                "link":"self",
-                "options": [
-                  {
-                    "label": "App Id",
-                    "value": "_id"
-                  }, {
-                    "label": "SSN",
-                    "value": "ssn"
-                  }, {
-                    "label": "First Name",
-                    "value": "firstname"
-                  }
-                ]
-              },{
-                "label": "",
-                "name": "searchCondition",
-                "type": "select",
-                "value": "",
-                "link":"self",
-                "options": [
-                  {
-                    "label": "Equals",
-                    "value": "="
-                  },{
-                    "label": "Contains",
-                    "value": "contains"
-                  }, {
-                    "label": "Greater Than",
-                    "value": ">"
-                  }, {
-                    "label": "Less Than",
-                    "value": "<"
-                  }
-                ]
-              },
-              {
-                "label": "",
-                "name": "searchValue",
-                "type": "text",
-                "required": true,
-                "value": ""
-              },
-              {
-                "label": "Search",
-                "name": "searchBtn",
-                "type": "button"
-              }
-            ]       
-      },
-      {
-        "sectionName": "Search Result",
-        "isTable":true,
-        "ColumnLabels": ["First Name","Last Name","SSN"],
-        "ColumnIds":["firstname", "lastname","ssn"]
-      }
-    ],
-    "searchStrings":
+{
+  "page": "Search application",
+  "sectionList": [
     {
-        "_id":"_id",
-        "ssn":"PageList.0.CategoryList.0.sectionList.0.linesList.0.fields.0.value",
-        "firstname":"PageList.0.CategoryList.0.sectionList.0.linesList.1.fields.0.value"
+      "sectionName": "",
+      "isSearch": true,
+      "fields": [
+        {
+          "label": "Search By",
+          "name": "searchCriteria",
+          "type": "select",
+          "value": "",
+          "link": "self",
+          "options": [
+            {
+              "label": "App Id",
+              "value": "_id"
+            },
+            {
+              "label": "SSN",
+              "value": "ssn"
+            },
+            {
+              "label": "First Name",
+              "value": "firstname"
+            }
+          ]
+        },
+        {
+          "label": "",
+          "name": "searchCondition",
+          "type": "select",
+          "value": "",
+          "link": "self",
+          "options": [
+            {
+              "label": "=",
+              "value": "="
+            },
+            {
+              "label": "Contains",
+              "value": "contains"
+            },
+            {
+              "label": ">",
+              "value": ">"
+            },
+            {
+              "label": "<",
+              "value": "<"
+            }
+          ]
+        },
+        {
+          "label": "",
+          "name": "searchValue",
+          "type": "text",
+          "required": true,
+          "value": ""
+        },
+        {
+          "label": "Search",
+          "name": "searchBtn",
+          "type": "button"
+        }
+      ]
     },
-    "searchTypes":
     {
-      "_id":"number",
-      "ssn":"string",
-      "firstname":"string"
-    } 
+      "sectionName": "Search Result",
+      "isTable": true,
+      "ColumnLabels": ["First Name", "Last Name", "SSN"],
+      "ColumnIds": ["firstname", "lastname", "ssn"]
+    }
+  ],
+  "searchStrings": {
+    "_id": "_id",
+    "ssn": "PageList.0.CategoryList.0.sectionList.0.linesList.0.fields.0.value",
+    "firstname": "PageList.0.CategoryList.0.sectionList.0.linesList.1.fields.0.value"
+  },
+  "searchTypes": {
+    "_id": "number",
+    "ssn": "string",
+    "firstname": "string"
+  }
 }
