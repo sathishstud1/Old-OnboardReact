@@ -18,13 +18,16 @@ class LeftNav extends React.Component {
               <Link to='/businessOnboard'>Business Onboard</Link>
             </li>
             <li>
-              <Link to='/search'>Customer Search</Link>
+              <Link to='/productOnboard'>Product Onboard</Link>
             </li>
             <li>
-              <Link to='/newApplication'>Create Application</Link>
+              <Link to='/search'>Search</Link>
             </li>
             <li>
-              <Link to='/search'>Application Search</Link>
+              <Link to='/search'>UW Decision</Link>
+            </li>
+            <li>
+              <Link to='/search'>Booking</Link>
             </li>
           </ul>
         </nav>
