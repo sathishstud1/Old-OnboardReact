@@ -2,6 +2,8 @@ import React from "react";
 import Header from './Header';
 import LeftNav from './LeftNav';
 import axios from "axios";
+import '../../App.css';
+import '../../index.css';
 import { Redirect } from "react-router-dom";
 
 

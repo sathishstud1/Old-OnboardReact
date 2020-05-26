@@ -7,6 +7,8 @@ import axios from "axios";
 import Header from './layout/Header';
 import LeftNav from './layout/LeftNav';
 import { Redirect } from "react-router-dom";
+import '../App.css';
+import '../index.css';
 
 class SearchApp extends React.Component {
   constructor(props) {

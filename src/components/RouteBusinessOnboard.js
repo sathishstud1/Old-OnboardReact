@@ -3,6 +3,8 @@ import { withRouter } from "react-router";
 import axios from "axios";
 import businessOnboardJson from "../file/businessOnboard.json";
 import CustomerOnboard from "./CustomerOnboard";
+import '../App.css';
+import '../index.css';
 
 class RouteBusinessOnboard extends React.Component {
   constructor(props) {

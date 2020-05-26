@@ -3,6 +3,8 @@ import { withRouter } from "react-router";
 import axios from "axios";
 import customerOnboardJson from "../file/cutomerOnboard.json";
 import CustomerOnboard from "./CustomerOnboard";
+import '../App.css';
+import '../index.css';
 
 class RouteCustomerOnboard extends React.Component {
   constructor(props) {
